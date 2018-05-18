@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import '../common/common.css';
+
 class MobileIndex extends Component {
     constructor(props) {
         super(props);
@@ -7,7 +9,7 @@ class MobileIndex extends Component {
     }
     render() { 
         return ( <div>
-            Mobile
+            <h1>testMobile</h1>
         </div> )
     }
 }

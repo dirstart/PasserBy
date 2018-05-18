@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+
+import Header from './component/Header';
+
 class PCIndex extends Component {
     constructor(props) {
         super(props);
@@ -6,7 +9,8 @@ class PCIndex extends Component {
     }
     render() { 
         return ( <div>
-            PC
+            <h1>testPC</h1>
+            <Header></Header>
         </div> )
     }
 }
