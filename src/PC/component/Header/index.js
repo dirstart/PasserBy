@@ -7,9 +7,6 @@ import SfMenu from './SfMenu';
 import './index.less';
 
 class Header extends Component {
-    constructor(props) {
-        super(props);
-    }
     render() { 
         return ( <header className="pc-main-header">
             <Row>
