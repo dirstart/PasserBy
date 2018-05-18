@@ -10,12 +10,12 @@ import registerServiceWorker from './registerServiceWorker';
 import 'antd/dist/antd.css';
 
 
-
 class Index extends Component {
     constructor(props) {
         super(props);
         this.state = {  }
     }
+
     render() { 
         return ( <div>
             <MediaQuery query='(min-device-width:1224px)'>
