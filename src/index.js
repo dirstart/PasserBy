@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import MediaQuery from 'react-responsive';
 
-import MobileIndex from './MobileIndex';
-import PCIndex from './PCIndex';
+import MobileIndex from './Mobile/MobileIndex';
+import PCIndex from './PC/PCIndex';
 
 import registerServiceWorker from './registerServiceWorker';
 
