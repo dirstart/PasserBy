@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 
-import '../common/common.css';
-
 class MobileIndex extends Component {
     constructor(props) {
         super(props);

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import {Row, Col} from 'antd';
-import {Menu, Item, Tabs} from 'antd';
+// import {Row, Col} from 'antd';
+// import {Menu, Item, Tabs} from 'antd';
 
 class Header extends Component {
     constructor(props) {

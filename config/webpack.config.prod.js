@@ -204,13 +204,24 @@ module.exports = {
                           }),
                         ],
                       },
-                    },
+                    }
                   ],
                 },
                 extractTextPluginOptions
               )
             ),
             // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
+          },
+          {
+            test: /\.less$/,
+            exclude: /node_modules/,
+            use: [
+              'style-loader',
+              {
+                loader: 'css-loader', options: {modules: false}
+              },
+              'less-loader'
+            ]
           },
           // "file" loader makes sure assets end up in the `build` folder.
           // When you `import` an asset, you get its filename.

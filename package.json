@@ -52,6 +52,7 @@
   "devDependencies": {
     "antd": "^3.5.2",
     "less": "^3.0.4",
+    "less-loader": "^4.1.0",
     "react-responsive": "^4.1.0"
   },
   "jest": {
