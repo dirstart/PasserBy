@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 
 import MHeader from './component/MHeader/index';
+import MMain from './component/MMain/index';
+
+import {BrowserRouter} from 'react-router-dom';
 
 class MobileIndex extends Component {
     constructor(props) {
@@ -8,9 +11,12 @@ class MobileIndex extends Component {
         this.state = {  }
     }
     render() { 
-        return ( <div>
-            <MHeader></MHeader>
-        </div> )
+        return ( <BrowserRouter>
+            <div>
+                <MHeader></MHeader>
+                <MMain></MMain>
+            </div>
+        </BrowserRouter> )
     }
 }
  

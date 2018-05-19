@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import {Link} from 'react-router-dom';
 import {Avatar, Tag, Menu, Icon, Button} from 'antd';
 import './index.less';
 
@@ -22,13 +22,21 @@ class MHeader extends Component {
             </div>
 
             <div className="mobile-header-item mobile-user-avatar">
-                <Avatar style={{ backgroundColor: '#f0f0f0' }} icon="user" />
+                <Link to="/m_home">
+                    <Avatar style={{ backgroundColor: '#f0f0f0' }} icon="user" />
+                </Link>
             </div>
 
             <div className="mobile-header-item mobile-mode">
                 <ButtonGroup>
-                    <Button type="primary">阅读<Icon type="cloud" /></Button>
-                    <Button type="primary">写作<Icon type="cloud-download" /></Button>
+                    <nav>
+                        <Button type="primary">
+                            <Link to="/m_reader">阅读<Icon type="cloud" /></Link>
+                        </Button>
+                        <Button type="primary">
+                            <Link to="/m_writer">写作<Icon type="cloud-download" /></Link>
+                        </Button>
+                    </nav>
                 </ButtonGroup>
             </div>
 
