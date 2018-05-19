@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-// import  { BrowserRouter as StaticRouter, Router, Switch, Route, Link } from 'react-router';
-// import  createBrowserHistory from 'history/createBrowserHistory';
 import {Menu, Tabs, Icon, Modal, Form, Input, Button} from 'antd';
 
-// const customHistory = createBrowserHistory();
+import {Link} from 'react-router-dom';
+
 const TabPane = Tabs.TabPane;
 const FormItem = Form.Item;
 
@@ -51,13 +50,19 @@ class SfMenu extends Component {
                 onClick={this.handleSelect}
             >
                 <Menu.Item key="shouye">
-                    <Icon type="appstore"/>首页
+                    <Link to="/p_home">
+                        <Icon type="appstore"/>首页
+                    </Link>
                 </Menu.Item>
                 <Menu.Item key="yuedu">
-                    <Icon type="appstore"/>阅读
+                    <Link to="/p_reader">
+                        <Icon type="appstore"/>阅读
+                    </Link>
                 </Menu.Item>
                 <Menu.Item key="bianji">
-                    <Icon type="appstore"/>编辑
+                    <Link to="/p_writer">
+                        <Icon type="appstore"/>编辑
+                    </Link>
                 </Menu.Item>
                 <Menu.Item key="xiangyata">
                     <Icon type="appstore"/>象牙塔

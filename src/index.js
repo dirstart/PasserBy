@@ -5,8 +5,6 @@ import MediaQuery from 'react-responsive';
 import MobileIndex from './Mobile/MobileIndex';
 import PCIndex from './PC/PCIndex';
 
-import Route from './router/index';
-
 import registerServiceWorker from './registerServiceWorker';
 
 import 'antd/dist/antd.css';

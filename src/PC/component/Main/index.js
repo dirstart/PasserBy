@@ -2,9 +2,19 @@ import React, { Component } from 'react';
 
 import {Row, Col} from 'antd';
 
+import {Switch, Route} from 'react-router-dom';
+
 import MainLeft from './Left/index';
-import Content from './Content/index';
-import SideBar from './SideBar/index';
+
+import HomeSidebar from '../../pages/Home/HomeSidebar';
+import HomeContent from '../../pages/Home/HomeContent';
+import ReaderSidebar from '../../pages/Reader/ReaderSidebar';
+import ReaderContent from '../../pages/Reader/ReaderContent';
+import WriterSiderbar from '../../pages/Writer/WriterSidebar';
+import WriterContent from '../../pages/Writer/WriterContent';
+
+
+
 import './index.less';
 
 class PCMain extends Component {
@@ -20,10 +30,18 @@ class PCMain extends Component {
                     <MainLeft></MainLeft>
                 </Col>
                 <Col span={12}>
-                    <Content></Content>
+                    <Switch>
+                        <Route path="/p_home" component={HomeContent}></Route>
+                        <Route path="/p_reader" component={ReaderContent}></Route>
+                        <Route path="/p_writer" component={WriterContent}></Route>
+                    </Switch>                    
                 </Col>
                 <Col span={4}>
-                    <SideBar></SideBar>
+                    <Switch>
+                        <Route path="/p_home" component={HomeSidebar}></Route>
+                        <Route path="/p_reader" component={ReaderSidebar}></Route>
+                        <Route path="/p_writer" component={WriterSiderbar}></Route>
+                    </Switch>
                 </Col>
                 <Col span={2}></Col>
             </Row>

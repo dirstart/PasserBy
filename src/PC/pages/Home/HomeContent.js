@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ContentTop from './ContentTop/index';
+import ContentTop from './Content/ContentTop';
 
 class Content extends Component {
     constructor(props) {
