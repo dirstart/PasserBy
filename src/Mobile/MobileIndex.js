@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import MHeader from './component/MHeader/index';
+
 class MobileIndex extends Component {
     constructor(props) {
         super(props);
@@ -7,7 +9,7 @@ class MobileIndex extends Component {
     }
     render() { 
         return ( <div>
-            <h1>testMobile</h1>
+            <MHeader></MHeader>
         </div> )
     }
 }

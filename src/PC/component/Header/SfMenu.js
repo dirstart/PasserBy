@@ -59,17 +59,17 @@ class SfMenu extends Component {
                 <Menu.Item key="bianji">
                     <Icon type="appstore"/>编辑
                 </Menu.Item>
-                <Menu.Item key="sanwen">
-                    <Icon type="appstore"/>散文
+                <Menu.Item key="xiangyata">
+                    <Icon type="appstore"/>象牙塔
                 </Menu.Item>
                 <Menu.Item key="mingzhu">
-                    <Icon type="appstore"/>名著
+                    <Icon type="appstore"/>个人测写
                 </Menu.Item>
                 <Menu.Item key="xinqing">
-                    <Icon type="appstore"/>心情
+                    <Icon type="appstore"/>普罗大众
                 </Menu.Item>
                 <Menu.Item key="qita">
-                    <Icon type="appstore"/>其他
+                    <Icon type="appstore"/>关于网站
                 </Menu.Item>
                 {userShow}
             </Menu>

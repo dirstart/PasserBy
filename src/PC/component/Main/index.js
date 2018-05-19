@@ -4,6 +4,7 @@ import {Row, Col} from 'antd';
 
 import MainLeft from './Left/index';
 import Content from './Content/index';
+import SideBar from './SideBar/index';
 import './index.less';
 
 class PCMain extends Component {
@@ -22,6 +23,7 @@ class PCMain extends Component {
                     <Content></Content>
                 </Col>
                 <Col span={4}>
+                    <SideBar></SideBar>
                 </Col>
                 <Col span={2}></Col>
             </Row>
