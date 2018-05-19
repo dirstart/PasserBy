@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 
-import {Avatar, Tag} from 'antd';
-
+import {Avatar, Tag, Menu, Icon, Button} from 'antd';
 import './index.less';
+
+const ButtonGroup = Button.Group;
 
 class MHeader extends Component {
     constructor(props) {
@@ -17,12 +18,21 @@ class MHeader extends Component {
             </a>
 
             <div className="mobile-header-item mobile-sign-in">
-                <Tag color="#f50" onClick={this.handleSignIn.bind(this)}>签到</Tag>
+                <Tag color="#089e8a" onClick={this.handleSignIn.bind(this)}>签到</Tag>
             </div>
 
             <div className="mobile-header-item mobile-user-avatar">
-                <Avatar size="small" style={{ backgroundColor: '#87d068' }} icon="user" />
+                <Avatar style={{ backgroundColor: '#f0f0f0' }} icon="user" />
             </div>
+
+            <div className="mobile-header-item mobile-mode">
+                <ButtonGroup>
+                    <Button type="primary">阅读<Icon type="cloud" /></Button>
+                    <Button type="primary">写作<Icon type="cloud-download" /></Button>
+                </ButtonGroup>
+            </div>
+
+
 
         </div> )
     }
