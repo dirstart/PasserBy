@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
-import {Avatar, Tag, Menu, Icon, Button} from 'antd';
+import {Avatar, Tag, Icon, Button} from 'antd';
 import './index.less';
 
 const ButtonGroup = Button.Group;

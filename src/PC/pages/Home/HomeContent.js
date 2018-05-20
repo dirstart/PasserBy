@@ -13,4 +13,4 @@ class Content extends Component {
     }
 }
  
-export default ContentTop;
+export default Content;

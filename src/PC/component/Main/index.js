@@ -31,6 +31,7 @@ class PCMain extends Component {
                 </Col>
                 <Col span={12}>
                     <Switch>
+                        <Route exact path="/" component={HomeContent}></Route>
                         <Route path="/p_home" component={HomeContent}></Route>
                         <Route path="/p_reader" component={ReaderContent}></Route>
                         <Route path="/p_writer" component={WriterContent}></Route>
@@ -38,6 +39,7 @@ class PCMain extends Component {
                 </Col>
                 <Col span={4}>
                     <Switch>
+                        <Route exact path="/" component={HomeSidebar}></Route>
                         <Route path="/p_home" component={HomeSidebar}></Route>
                         <Route path="/p_reader" component={ReaderSidebar}></Route>
                         <Route path="/p_writer" component={WriterSiderbar}></Route>
