@@ -31,7 +31,7 @@ class PCMain extends Component {
                 </Col>
                 <Col span={12}>
                     <Switch>
-                        <Route exact path="/" component={HomeContent}></Route>
+                        <Route exactpath="/" component={HomeContent}></Route>
                         <Route path="/p_home" component={HomeContent}></Route>
                         <Route path="/p_reader" component={ReaderContent}></Route>
                         <Route path="/p_writer" component={WriterContent}></Route>
