@@ -28,7 +28,7 @@ class ReaderMain extends Component {
             <Layout>
                 <Header style={headerStyle}>
                     <span>Reading</span>
-                    <Link to="/search" className="mobile-reader-search-icon-wrap">
+                    <Link to="/m_search" className="mobile-reader-search-icon-wrap">
                         <Icon type="search" className="mobile-reader-search-icon" />
                     </Link>
                 </Header>
