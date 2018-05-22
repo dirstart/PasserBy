@@ -22,7 +22,7 @@ class SfMenu extends Component {
         const {getFieldDecorator} = this.props.form;
         const userShow = state.isLogin ?
             (
-                <Menu.Item key="logout" className="register">
+                <Menu.Item key="logout" className="has-login">
                     <Button type="primary" htmlType="button">
                         {this.state.userName}
                     </Button> &nbsp;&nbsp;

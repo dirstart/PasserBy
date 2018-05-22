@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
-import {Icon, Card, Avatar, Tag} from 'antd';
+import {Card, Avatar, Tag} from 'antd';
 import './writer-sidebar.less';
 
 const {Meta} = Card;
