@@ -162,7 +162,6 @@ class SfMenu extends Component {
     }
 
     handleLogout() {
-        console.log('登出');
         this.setState({
             isLogin: false
         });

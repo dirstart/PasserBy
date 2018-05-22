@@ -7,7 +7,7 @@ class Content extends Component {
         this.state = {  }
     }
     render() { 
-        return ( <div className="pc-main-content">
+        return ( <div className="pc-home-content">
             <ContentTop></ContentTop>
         </div> )
     }

@@ -6,8 +6,8 @@ class WriterContent extends Component {
         this.state = {  }
     }
     render() { 
-        return ( <div>
-            WriterContent
+        return ( <div className="pc-writer-main">
+            
         </div> )
     }
 }

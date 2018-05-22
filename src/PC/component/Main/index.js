@@ -14,9 +14,6 @@ import WriterSiderbar from '../../pages/Writer/WriterSidebar';
 import WriterContent from '../../pages/Writer/WriterContent';
 
 
-
-import './index.less';
-
 class PCMain extends Component {
     constructor(props) {
         super(props);
@@ -31,7 +28,7 @@ class PCMain extends Component {
                 </Col>
                 <Col span={12}>
                     <Switch>
-                        <Route exactpath="/" component={HomeContent}></Route>
+                        <Route exact path="/" component={HomeContent}></Route>
                         <Route path="/p_home" component={HomeContent}></Route>
                         <Route path="/p_reader" component={ReaderContent}></Route>
                         <Route path="/p_writer" component={WriterContent}></Route>
