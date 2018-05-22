@@ -31,7 +31,9 @@ class MSearch extends Component {
 
     componentWillReceiveProps(nextProps) {
         this.setState({
-            isLoading: false
+            isLoading: false,
+            searchValue: nextProps.fetchBookList.name,
+            bookList: nextProps.fetchBookList.books
         });
     }
 
@@ -53,9 +55,9 @@ class MSearch extends Component {
             <Spin tip="书籍搜索中..." spinning={this.state.isLoading}>
                 <Content style={contentStyle}>
                     {
-                        bookList.length?
-                            bookList.map(item => (
-                                <BookCard/>
+                        bookList && bookList.length?
+                            bookList.map((item, index) => (
+                                <BookCard key={index} />
                             ))
                             :
                             <div>空空如也</div>

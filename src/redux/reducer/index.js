@@ -5,11 +5,12 @@ import {GET_BOOK_LIST}  from '../action/index';
 export const fetchBookList = (state = {books: [], name: ''}, action={}) => {
   switch (action.type){
     case GET_BOOK_LIST:
-      console.log('进入到reducer');
+      console.log(action);
       let {
         data: {books},
         name
       } = action
+      console.log( books);
       return {books, name};
     default:
       return state;
