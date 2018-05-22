@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Menu, Tabs, Icon, Modal, Form, Input, Button} from 'antd';
-
 import {Link} from 'react-router-dom';
+import Axios from 'axios';
 
 const TabPane = Tabs.TabPane;
 const FormItem = Form.Item;
@@ -10,7 +10,7 @@ class SfMenu extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            current: "kehuan",
+            current: "shouye",
             isLogin: false,
             modalVisible: false,
             userAction: 'login'
@@ -88,7 +88,7 @@ class SfMenu extends Component {
             >
                 <Tabs type="card" onChange={this.handleUserAction.bind(this)}>
                     <TabPane tab={<span><Icon type="android" />登陆</span>} key="login">
-                        <Form layout="horizontal" onSubmit={this.handleSubmit.bind(this)}>
+                        <Form layout="horizontal" onSubmit={this.handleLogin.bind(this)}>
                             <FormItem label="账户">
                                 {getFieldDecorator('userName', {
                                     rules: [{ required: true, message: '用户名不能为空!' }],
@@ -104,11 +104,11 @@ class SfMenu extends Component {
                                 )}
                             </FormItem>
                             <Button type="primary" className="pc-login-btn" htmlType="submit">登录</Button>
-                            <Button type="primary" className="pc-register-btn" onClick={() => this.setModalVisible(false)} ghost>关闭</Button>
+                            <Button type="primary" className="pc-close-btn" onClick={() => this.setModalVisible(false)} ghost>关闭</Button>
                         </Form>
                     </TabPane>
                     <TabPane tab={<span><Icon type="apple" />注册</span>} key="register">
-                        <Form layout="horizontal" onSubmit={this.handleSubmit.bind(this)}>
+                        <Form layout="horizontal" onSubmit={this.handleRegister.bind(this)}>
                             <FormItem label="账户">
                                 {getFieldDecorator('rUserName', {
                                     rules: [{ required: true, message: '用户名不能为空!' }],
@@ -130,7 +130,8 @@ class SfMenu extends Component {
                                     <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
                                 )}
                             </FormItem>
-                            <Button type="submit" htmlType="submit">注册</Button>
+                            <Button type="primary" className="pc-register-btn" htmlType="submit">注册</Button>
+                            <Button type="primary" className="pc-close-btn" onClick={() => this.setModalVisible(false)} ghost>关闭</Button>
                         </Form>
                     </TabPane>
                 </Tabs>
@@ -160,18 +161,48 @@ class SfMenu extends Component {
         });
     }
 
-    handleSubmit(e) {
+    async handleLogin(e) {
         e.preventDefault();
         let formData = this.props.form.getFieldsValue();
-        let action = this.state.action;
 
-        if (action === 'login') {
-            console.log('login', formData.userName, formData.userPsd);
+        if (!formData.userName.trim() || !formData.userPsd.trim()) {
+            alert('所有信息均不能为空');
+            return;
         }
+        const userData = {
+            userName: formData.userName.trim(),
+            userPsd: formData.userPsd.trim()
+        };
     }
 
-    handleSubmit2() {
-        
+    async handleRegister(e) {
+        e.preventDefault();
+        let formData = this.props.form.getFieldsValue();
+
+        if (formData.rUserPsd !== formData.rxUserPsd) {
+            alert('两次密码不一样');
+            return;
+        }
+        console.log(formData);
+        if (!formData.rUserName.trim() || !formData.rUserPsd.trim() || !formData.rxUserPsd.trim()) {
+            alert('所有信息均不能为空');
+            return;
+        }
+        const userData = {
+            userName: formData.rUserName,
+            userPsd: formData.rUserPsd
+        }
+
+        const res = await Axios.post('/user/register', userData);
+        const {data} = res;
+        if (!data.success) {
+            console.log(data);
+            alert("错误信息:" + data && data.msg);
+        } else {
+            // 注册成功，关闭窗口，自动登陆
+            alert('注册成功,正在为您自动登陆');
+            this.setModalVisible(false);
+        }
     }
 }
  

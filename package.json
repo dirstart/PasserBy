@@ -52,9 +52,14 @@
   "devDependencies": {
     "antd": "^3.5.2",
     "axios": "^0.18.0",
+    "body-parser": "^1.18.3",
     "connect": "^3.6.6",
+    "connect-mongo": "^2.0.1",
+    "cookie-parser": "^1.4.3",
+    "express-session": "^1.15.6",
     "less": "^3.0.4",
     "less-loader": "^4.1.0",
+    "mongoose": "^5.1.2",
     "react-redux": "^5.0.7",
     "react-responsive": "^4.1.0",
     "react-router": "^4.2.0",
@@ -104,5 +109,6 @@
   },
   "eslintConfig": {
     "extends": "react-app"
-  }
+  },
+  "proxy": "http://127.0.0.1:1111"
 }

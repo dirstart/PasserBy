@@ -22,7 +22,7 @@ class MainLeft extends Component {
     constructor(props) {
         super(props);
         this.state = { 
-            motto: "一日之际在于晨。"
+            motto: '若有恒,何必三更眠五更起;最无益,一日曝十日寒。'
          }
     }
     render() {
