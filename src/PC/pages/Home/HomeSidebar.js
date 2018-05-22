@@ -25,7 +25,7 @@ class SideBar extends Component {
         this.state = {  }
     }
     render() { 
-        return ( <div className="pc-home-main-sidebar">
+        return ( <div className="pc-home-sidebar">
             <Collapse bordered={false} defaultActiveKey={['1']}>
                 <Panel header="This is panel header 1" key="1" style={customPanelStyle}>
                     <p>{text}</p>

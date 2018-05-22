@@ -12,6 +12,7 @@ import ReaderSidebar from '../../pages/Reader/ReaderSidebar';
 import ReaderContent from '../../pages/Reader/ReaderContent';
 import WriterSiderbar from '../../pages/Writer/WriterSidebar';
 import WriterContent from '../../pages/Writer/WriterContent';
+import WriterContentM from '../../pages/Writer/WriterContentM';
 
 
 class PCMain extends Component {
@@ -31,8 +32,9 @@ class PCMain extends Component {
                         <Route exact path="/" component={HomeContent}></Route>
                         <Route path="/p_home" component={HomeContent}></Route>
                         <Route path="/p_reader" component={ReaderContent}></Route>
-                        <Route path="/p_writer" component={WriterContent}></Route>
-                    </Switch>                    
+                        <Route exact path="/p_writer" component={WriterContent}></Route>
+                        <Route exact path="/p_writer/markdown" component={WriterContentM}></Route>
+                    </Switch>
                 </Col>
                 <Col span={4}>
                     <Switch>

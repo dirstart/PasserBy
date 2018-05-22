@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './writer-content.less';
 
 class WriterContent extends Component {
     constructor(props) {
@@ -7,7 +8,6 @@ class WriterContent extends Component {
     }
     render() { 
         return ( <div className="pc-writer-main">
-            
         </div> )
     }
 }
