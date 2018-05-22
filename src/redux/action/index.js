@@ -2,7 +2,6 @@ import Axios from 'axios';
 
 export const GET_BOOK_LIST = 'GET_BOOK_LIST';
 
-
 export const receiveBookList = (data, name) => {
     console.log('receiveBook');
     return {
@@ -25,9 +24,6 @@ export const getBookList = (name) => {
         //     //   return data;
         // })
         // dispatch(receiveBookList(data, name));
-
-        Axios.get('/api/RoomApi/game')
-            .then(res => console.log(res));
     }
   }
   
