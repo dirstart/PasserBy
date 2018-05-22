@@ -175,7 +175,17 @@ class SfMenu extends Component {
             userName,
             userPsd
         };
-        console.log(userData);
+
+        const {data} = await Axios.get('/user/login', {
+            params: userData
+        });
+
+        if (!data.success) {
+            alert(data.msg);
+        }
+
+        console.log('登陆成功');
+        
     }
 
     async handleRegister(e) {

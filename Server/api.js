@@ -4,7 +4,7 @@ const models = require('./db');
 router.get('/', (req, res) => {
 });
 
-// 用户注册
+// 1.用户注册
 router.post('/user/register', (req, res) => {
 
     const newData = new models.User({
@@ -52,6 +52,42 @@ router.post('/user/register', (req, res) => {
 
 
 });
+
+// 2.用户登陆
+router.get('/user/login', (req, res) => {
+    console.log(req);
+    const _user = {
+        userName: req.query.userName,
+        userPsd: req.query.userPsd
+    };
+    console.log('后台发送过来的是这个', _user);
+
+    models.User.findOne(_user, (err, user) => {
+        if (err) {
+            res.send({
+                success: false,
+                msg: '系统错误'
+            });
+            return;
+        }
+
+        if (!user) {
+            console.log('用户不存在');
+            res.send({
+                success: false,
+                msg: '用户不存在'
+            });
+            return;
+        }
+
+        req.session.user = user;
+        console.log('登陆成功');
+        res.send({
+            success: true,
+            msg: '登陆成功'
+        });
+    })
+})
 
 
 
