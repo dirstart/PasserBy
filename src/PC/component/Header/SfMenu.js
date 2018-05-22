@@ -163,38 +163,43 @@ class SfMenu extends Component {
 
     async handleLogin(e) {
         e.preventDefault();
-        let formData = this.props.form.getFieldsValue();
+        let formData = this.props.form.getFieldsValue(),
+            userName = (formData.userName && formData.userName.trim()) || '',
+            userPsd = (formData.userPsd && formData.userPsd.trim()) || '';
 
-        if (!formData.userName.trim() || !formData.userPsd.trim()) {
+        if (!userName.length || !userPsd.length) {
             alert('所有信息均不能为空');
             return;
         }
         const userData = {
-            userName: formData.userName.trim(),
-            userPsd: formData.userPsd.trim()
+            userName,
+            userPsd
         };
+        console.log(userData);
     }
 
     async handleRegister(e) {
         e.preventDefault();
-        let formData = this.props.form.getFieldsValue();
+        let formData = this.props.form.getFieldsValue(),
+            userName = (formData.rUserName && formData.rUserName.trim()) || '',
+            userPsd = (formData.rUserPsd && formData.rUserPsd.trim()) || '',
+            userPsdX = (formData.rxUserPsd && formData.rxUserPsd.trim()) || '';
 
-        if (formData.rUserPsd !== formData.rxUserPsd) {
+        if (userPsd !== userPsdX) {
             alert('两次密码不一样');
             return;
         }
-        console.log(formData);
-        if (!formData.rUserName.trim() || !formData.rUserPsd.trim() || !formData.rxUserPsd.trim()) {
+        if (!userName || !userPsd || !userPsdX) {
             alert('所有信息均不能为空');
             return;
         }
-        const userData = {
-            userName: formData.rUserName,
-            userPsd: formData.rUserPsd
-        }
 
-        const res = await Axios.post('/user/register', userData);
-        const {data} = res;
+        const userData = {
+            userName,
+            userPsd
+        };
+
+        const {data} = await Axios.post('/user/register', userData);
         if (!data.success) {
             console.log(data);
             alert("错误信息:" + data && data.msg);
