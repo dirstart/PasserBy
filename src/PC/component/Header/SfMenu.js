@@ -13,30 +13,30 @@ class SfMenu extends Component {
             current: "shouye",
             isLogin: false,
             modalVisible: false,
-            userAction: 'login'
+            userAction: 'login',
+            userName: ''
         }
     }
     render() {
         const state = this.state;
         const {getFieldDecorator} = this.props.form;
         const userShow = state.isLogin ?
-            // (<Menu.Item key="logout" className="register">
-            //     <Button type="primary" htmlType="button">
-            //         {this.state.userNickName}
-            //     </Button> &nbsp;&nbsp;
-            //     <Button type="dashed" htmlType="button">
-            //         {
-            //             <Router history={customHistory}>
-            //                 <Link to="god">
-            //                     个人中心
-            //                 </Link>
-            //             </Router>
-            //         }
-            //     </Button>	
-            //     &nbsp;&nbsp;
-            //     <Button type="ghost" htmlType="button" onClick={this.logout.bind(this)}>退出</Button>
-            // </Menu.Item>)
-            (null)
+            (
+                <Menu.Item key="logout" className="register">
+                    <Button type="primary" htmlType="button">
+                        {this.state.userName}
+                    </Button> &nbsp;&nbsp;
+                    <Button type="dashed" htmlType="button">
+                        <Link to="/p_home">个人中心</Link>
+                    </Button>
+                    &nbsp;&nbsp;
+                    <Button
+                        type="ghost"
+                        htmlType="button"
+                        onClick={this.handleLogout.bind(this)}
+                    >退出</Button>
+                </Menu.Item>          
+            )
             :
             (
                 <Menu.Item key="register" className="register">
@@ -161,6 +161,13 @@ class SfMenu extends Component {
         });
     }
 
+    handleLogout() {
+        console.log('登出');
+        this.setState({
+            isLogin: false
+        });
+    }
+
     async handleLogin(e) {
         e.preventDefault();
         let formData = this.props.form.getFieldsValue(),
@@ -183,9 +190,11 @@ class SfMenu extends Component {
         if (!data.success) {
             alert(data.msg);
         }
-
-        console.log('登陆成功');
-        
+        this.setState({
+            isLogin: true,
+            userName: userName
+        });
+        this.setModalVisible(false);
     }
 
     async handleRegister(e) {
