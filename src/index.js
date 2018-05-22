@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import {Provider} from 'react-redux';
 import MediaQuery from 'react-responsive';
-
 import MobileIndex from './Mobile/MobileIndex';
 import PCIndex from './PC/PCIndex';
-
 import registerServiceWorker from './registerServiceWorker';
-
 import 'antd/dist/antd.css';
+import store from './redux/store/index';
 
 
 class Index extends Component {
@@ -31,5 +30,10 @@ class Index extends Component {
 export default Index;
 
 
-ReactDOM.render(<Index />, document.getElementById('root'));
+ReactDOM.render(
+    (<Provider store={store}>
+        <Index />
+    </Provider>),
+    document.getElementById('root')
+);
 registerServiceWorker();

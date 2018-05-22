@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import {Layout, Icon, Input, Spin} from 'antd';
 
 import BookCard from '../common/BookCard';
+import Template from '../common/Template';
 import './index.less';
 
 const Header = Layout.Header;
@@ -23,9 +24,17 @@ class MSearch extends Component {
         super(props);
         this.state = { 
             isLoading: false,
+            searchValue: '',
             bookList: []
          }
     }
+
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            isLoading: false
+        });
+    }
+
     render() {
         let {bookList} = this.state;
         return ( <div className="mobile-search-page">
@@ -35,12 +44,13 @@ class MSearch extends Component {
                 </Link>
                 <Search
                     className="mobile-search-bar"
-                    placeholder="input search text"
-                    onSearch={value => this.handleSearch(value)}
+                    placeholder="请输入您要搜索的书名"
+                    onChange={this.handleChange.bind(this)}
+                    onPressEnter={this.handleSearch.bind(this)}
                     enterButton
                 />
             </Header>
-            <Spin tip="拼命加载中..." spinning={this.state.isLoading}>
+            <Spin tip="书籍搜索中..." spinning={this.state.isLoading}>
                 <Content style={contentStyle}>
                     {
                         bookList.length?
@@ -56,18 +66,19 @@ class MSearch extends Component {
         </div> )
     }
 
-    handleSearch(value) {
-        this.setState({
-            isLoading: true
-        });
-        if (value && value.length) {
+    handleChange(e) {
+        this.setState({ searchValue: e.target.value});
+    }
 
+    handleSearch() {
+        const {searchValue} = this.state;
+        if (searchValue && searchValue.length) {
+            this.setState({isLoading: true});
+            this.props.getBookList(searchValue);
         } else {
             console.log('输入不能为空');
         }
     }
-
-    
 }
  
-export default MSearch;
+export default Template(MSearch);
