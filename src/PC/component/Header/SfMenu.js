@@ -165,6 +165,8 @@ class SfMenu extends Component {
         this.setState({
             isLogin: false
         });
+        localStorage.setItem('userName', '');
+        localStorage.setItem('userPsd', '');
     }
 
     async handleLogin(e) {
@@ -194,6 +196,11 @@ class SfMenu extends Component {
             userName: userName
         });
         this.setModalVisible(false);
+        // localStorage.userName = userName;
+        // localStorage.userPsd = userPsd;
+        localStorage.setItem('userName', userName);
+        localStorage.setItem('userPsd', userPsd);
+        console.log(localStorage);
     }
 
     async handleRegister(e) {
