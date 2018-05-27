@@ -6,6 +6,7 @@ const userSchema = new mongoose.Schema({
     type: String
   },
   userPsd: String,
+  collect: Array,
   meta: {
     createAt: {
       type: Date,
