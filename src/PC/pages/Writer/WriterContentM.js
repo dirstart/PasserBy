@@ -8,7 +8,8 @@ class WriterContentM extends Component {
     }
     render() { 
         return ( <div className="pc-writer-main-m">
-            markdown.
+            <div className="left"></div>
+            <div className="right"></div>
         </div> )
     }
 }

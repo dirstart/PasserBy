@@ -87,7 +87,19 @@ router.get('/user/login', (req, res) => {
             msg: '登陆成功'
         });
     })
-})
+});
+
+// 3.用户查询书籍
+
+router.get('/mobile/search/books', (req, res) => {
+    console.log('this is search');
+    res.render({
+        data: {
+            name: '123',
+            chapter: 3
+        }
+    });
+});
 
 
 

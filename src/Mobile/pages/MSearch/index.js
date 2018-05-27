@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import {Layout, Icon, Input, Spin} from 'antd';
 
 import BookCard from '../common/BookCard';
-import Template from '../common/Template';
+import Template from '../../../redux/Template';
 import './index.less';
 
 const Header = Layout.Header;
@@ -48,7 +48,7 @@ class MSearch extends Component {
                     className="mobile-search-bar"
                     placeholder="请输入您要搜索的书名"
                     onChange={this.handleChange.bind(this)}
-                    onPressEnter={this.handleSearch.bind(this)}
+                    onSearch={this.handleSearch.bind(this)}
                     enterButton
                 />
             </Header>
