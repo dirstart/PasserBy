@@ -12,7 +12,7 @@ const Main = (component) => {
         fetchBookList,
         fetchBookItem,
         bookList
-      }
+      } 
     }
   
     return connect(

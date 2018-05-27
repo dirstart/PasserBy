@@ -1,4 +1,6 @@
 const User = require('./db/models/user');
+const Motto = require('./db/models/motto');
+
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/passerBy');
 
@@ -11,9 +13,10 @@ db.once('open', () => {
   console.log('Mongo connection successed');
 });
 
-// 将模型集中定义在这里
+// 将模型集中定义在这里，这里没有实体化 Model，所以并不是 Entity
 const Models = {
-  User: User
+  User: User,
+  Motto: Motto
 };
 
 module.exports = Models;

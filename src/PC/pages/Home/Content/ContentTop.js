@@ -5,12 +5,20 @@ import './index.less';
 
 class ContentTop extends Component {
     render() { 
-        return ( <div>
+        return ( <div className="pc-home-top-carousel">
             <Carousel autoplay>
-                <div className="test-carousel"><h3>1</h3></div>
-                <div className="test-carousel"><h3>2</h3></div>
-                <div className="test-carousel"><h3>3</h3></div>
-                <div className="test-carousel"><h3>4</h3></div>
+                <div className="carousel-wrap">
+                    <img className="carousel-img" src={`${process.env.PUBLIC_URL}/img/1.jpg`} alt=""/>
+                </div>
+                <div className="carousel-wrap">
+                    <img className="carousel-img" src={`${process.env.PUBLIC_URL}/img/2.jpg`} alt=""/>
+                </div>
+                <div className="carousel-wrap">
+                    <img className="carousel-img" src={`${process.env.PUBLIC_URL}/img/3.jpg`} alt=""/>
+                </div>
+                <div className="carousel-wrap">
+                    <img className="carousel-img" src={`${process.env.PUBLIC_URL}/img/4.jpg`} alt=""/>
+                </div>
             </Carousel>
         </div> )
     }

@@ -102,5 +102,14 @@ router.get('/mobile/search/books', (req, res) => {
 });
 
 
+// 4.每日名人名言切换
+
+router.get('/saying', (req, res) => {
+    console.log('这里是名言查找');
+    res.render({
+        data: '这是名言'
+    });
+})
+
 
 module.exports = router;
