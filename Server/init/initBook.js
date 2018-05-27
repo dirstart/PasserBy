@@ -5,11 +5,27 @@ const initBook = () => {
 
     let bookTextOne = fs.readFileSync("./books/1.txt", "utf-8");
     bookTextOne = handle(bookTextOne);
+    const bookOneLen = bookTextOne.trim().length;
+    console.log(bookOneLen);
 
-    console.log(bookTextOne);
-    const insertData = {
-        
-    }
+    const insertDataOne = new models.Library({
+        ID: 1,
+        title: '解忧杂货店',
+        author: '东野圭吾',
+        cat: '治愈',
+        info: '很温暖的一本书',
+        cover: '暂时没有',
+        count: bookOneLen,
+        content: bookTextOne
+    });
+
+    insertDataOne.save((err, data) => {
+        if (err) {
+            console.log('数据库初始化书籍错误');
+        } else {
+            console.log('数据库初始化书籍成功')
+        }
+    })
 }
 
 const handle = str => {

@@ -121,5 +121,23 @@ router.get('/pc/motto', (req, res) => {
     });
 });
 
+// 5.给用户返回书籍
+
+router.get('/pc/book', (req, res) => {
+    models.Library.find({ID: 1}, (err, data) => {
+        if (err) {
+            res.send({
+                success: false,
+                mes: '数据库错误'
+            });
+        } else {
+            res.send({
+                success: true,
+                data: data
+            });
+        }
+    });
+});
+
 
 module.exports = router;

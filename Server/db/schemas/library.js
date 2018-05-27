@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
-const libSchema = new mongoose.Schema({
+const librarySchema = new mongoose.Schema({
     // 书籍ID
     ID: {
         unique: true,
-        type: String
+        type: Number
     },
     // 书名
     title: {
@@ -32,15 +32,17 @@ const libSchema = new mongoose.Schema({
     },
     // 好评率
     good: {
-        type: Number
+        type: Number,
+        default: 0
     },
     // 粉丝人数
     fan: {
-        type: Number
+        type: Number,
+        default: 0
     },
     // 书本的内容，有些也许不是章节什么的
     content: {}
 });
 
 
-module.exports = libSchema;
+module.exports = librarySchema;

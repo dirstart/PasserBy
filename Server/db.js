@@ -1,6 +1,6 @@
 const User = require('./db/models/user');
 const Motto = require('./db/models/motto');
-const Lib = require('./db/schemas/lib');
+const Library = require('./db/models/library');
 
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/passerBy');
@@ -22,7 +22,7 @@ db.once('close', () => {
 const Models = {
   User: User,
   Motto: Motto,
-  Lib: Lib
+  Library: Library
 };
 
 module.exports = Models;
