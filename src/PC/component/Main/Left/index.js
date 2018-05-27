@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
+import Axios from 'axios';
 
 import {Card, Tag, Timeline, Divider} from 'antd';
 import './index.less';
 
+const myDate = new Date();
+const weekArray = ["日", "一", "二", "三", "四", "五", "六"];
+
 const TagGroup = (
     <div>
-        <Tag color="magenta">星期六</Tag>
-        <Tag color="cyan">五月20日</Tag>
+        <Tag color="magenta">星期{weekArray[myDate.getDay()]}</Tag>
+        <Tag color="cyan">{myDate.getMonth() + 1}月{myDate.getDate()}日</Tag>
     </div>
 );
 
@@ -25,6 +29,23 @@ class MainLeft extends Component {
             motto: '若有恒,何必三更眠五更起;最无益,一日曝十日寒。'
          }
     }
+
+    componentWillMount() {
+        this.getMotto();
+    }
+
+    async getMotto() {
+        const {data} = await Axios.get('/pc/motto');
+        if (!data.success) {
+            return;
+        };
+        const index = Math.floor(Math.random() * data.data.length);
+        const selectedMotto = data.data[index];
+        this.setState({
+            motto: selectedMotto.content
+        });
+    }
+
     render() {
         const state = this.state;
         return ( <div className="pc-main-left">

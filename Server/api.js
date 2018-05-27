@@ -55,7 +55,6 @@ router.post('/user/register', (req, res) => {
 
 // 2.用户登陆
 router.get('/user/login', (req, res) => {
-    console.log(req);
     const _user = {
         userName: req.query.userName,
         userPsd: req.query.userPsd
@@ -102,14 +101,25 @@ router.get('/mobile/search/books', (req, res) => {
 });
 
 
-// 4.每日名人名言切换
+// 4.获取随机的名言
 
-router.get('/saying', (req, res) => {
-    console.log('这里是名言查找');
-    res.render({
-        data: '这是名言'
+router.get('/pc/motto', (req, res) => {
+    console.log('这里开始名言查找');
+
+    models.Motto.find({}, (error, data) => {
+        if (error) {
+            res.send({
+                success: false,
+                mes: '数据库错误'
+            })
+        } else {
+            res.send({
+                success: true,
+                data: data
+            });
+        }
     });
-})
+});
 
 
 module.exports = router;
