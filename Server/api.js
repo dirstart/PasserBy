@@ -88,8 +88,7 @@ router.get('/user/login', (req, res) => {
     })
 });
 
-// 3.用户查询书籍
-
+// 3.移动端-用户查询数据地点
 router.get('/mobile/search/books', (req, res) => {
     console.log('this is search');
     res.render({
@@ -101,11 +100,8 @@ router.get('/mobile/search/books', (req, res) => {
 });
 
 
-// 4.获取随机的名言
-
+// 4.PC端-获取随机的名言
 router.get('/pc/motto', (req, res) => {
-    console.log('这里开始名言查找');
-
     models.Motto.find({}, (error, data) => {
         if (error) {
             res.send({
@@ -121,8 +117,7 @@ router.get('/pc/motto', (req, res) => {
     });
 });
 
-// 5.给用户返回书籍，这里只返回书籍的部分信息
-
+// 公共库：返回书籍信息
 router.get('/pc/book', (req, res) => {
     models.Library.find({ID: 1}, (err, data) => {
         if (err) {
@@ -138,6 +133,14 @@ router.get('/pc/book', (req, res) => {
         }
     });
 });
+
+// PC端：查询用户自己写的书
+router.get('/pc/user/write/book', (req, res) => {
+    console.log('test');
+    res.send({
+        mes: 'hello, world!'
+    })
+})
 
 // 6.返回书籍详情
 

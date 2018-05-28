@@ -6,7 +6,7 @@ class ReaderContent extends Component {
         this.state = {  }
     }
     render() { 
-        return ( <div>
+        return ( <div className="pc-reader-main">
             ReaderContent
         </div> )
     }

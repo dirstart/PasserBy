@@ -8,8 +8,21 @@ const {Meta} = Card;
 class WriterSidebar extends Component {
     constructor(props) {
         super(props);
-        this.state = {  }
+        this.state = {
+            isLogin: false
+        }
     }
+
+    componentWillMount() {
+        // 这里先获取一下用户是否登录，如果没有登录让用户先登录
+        const userName = JSON.parse(localStorage.getItem('userName'));
+        if (userName) {
+            console.log('有名字');
+            this.setState({isLogin: true});
+        }
+
+    }
+
     render() {
         return ( <div className="pc-writer-sidebar">
             <Card
@@ -31,7 +44,16 @@ class WriterSidebar extends Component {
                 hoverable="true"
                 style={{ width: 300, marginTop: '10px' }}
             >
-                作者的一系列信息
+                {
+                    this.state.isLogin ? 
+                        <div>
+                            您已经登录，这里是您的用户信息。
+                        </div>
+                        :
+                        <span>
+                            您还没有登录，请您登录后再进行操作。
+                        </span>
+                }
             </Card>
         </div> )
     }

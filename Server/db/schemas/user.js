@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema({
   // 记录用户要看的书
   collect: Array,
   // 记录用户写下的草稿
-  writer: {
+  write: {
     type: Array,
     default: []
   },
