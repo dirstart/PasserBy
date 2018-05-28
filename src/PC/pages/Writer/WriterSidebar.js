@@ -13,6 +13,7 @@ class WriterSidebar extends Component {
     render() {
         return ( <div className="pc-writer-sidebar">
             <Card
+                hoverable="true"
                 style={{ width: 300 }}
                 cover={<img alt="example" src="https://raw.githubusercontent.com/dirstart/image_bed/master/graduate2.jpg" />}
                 actions={[
@@ -25,6 +26,12 @@ class WriterSidebar extends Component {
                 title={<Tag color="green">Tip - 提供两种文本格式</Tag>}
                 description="点击我下面的按钮"
                 />
+            </Card>
+            <Card
+                hoverable="true"
+                style={{ width: 300, marginTop: '10px' }}
+            >
+                作者的一系列信息
             </Card>
         </div> )
     }
