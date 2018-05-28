@@ -10,7 +10,8 @@ class WriterSidebar extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isLogin: false
+            isLogin: false,
+            writeBook: []
         }
     }
 
@@ -23,10 +24,12 @@ class WriterSidebar extends Component {
 
         this.setState({isLogin: true});
         // 通过用户信息获取用户对应的写作信息。
-        this.getUserWriteBook();
+        this.getUserWriteBook(userName);
     }
 
     render() {
+        const {writeBook} = this.state;
+        console.log('write-book', writeBook);
         return ( <div className="pc-writer-sidebar">
             <Card
                 hoverable="true"
@@ -50,7 +53,14 @@ class WriterSidebar extends Component {
                 {
                     this.state.isLogin ? 
                         <div>
-                            您已经登录，这里是您的用户信息。
+                            {
+                                writeBook.length ?
+                                writeBook.map((book, index) => {
+                                    <div key={index}>
+                                        您写过的书 {book.name}
+                                    </div>
+                                }):<div>您尚未开始您的旅途。</div>
+                            }
                         </div>
                         :
                         <span>
@@ -61,9 +71,12 @@ class WriterSidebar extends Component {
         </div> )
     }
 
-    async getUserWriteBook() {
-        const {data} = await Axios.get('/pc/user/write/book', (req, res) => {
-
+    async getUserWriteBook(userName) {
+        const {data} = await Axios.get('/pc/user/write/book', {
+            params: {userName}
+        });
+        this.setState({
+            writeBook: data
         });
     }
 }

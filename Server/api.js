@@ -136,11 +136,22 @@ router.get('/pc/book', (req, res) => {
 
 // PC端：查询用户自己写的书
 router.get('/pc/user/write/book', (req, res) => {
-    console.log('test');
-    res.send({
-        mes: 'hello, world!'
+    const userName = req.query.userName;
+    models.User.find({userName: userName}, (err, data) => {
+        console.log('后端查到的数据是', data);
+        if (err) {
+            res.send({
+                success: false,
+                mes: '数据库错误'
+            });
+        } else {
+            res.send({
+                success: true,
+                data: data[0].write
+            })
+        }
     })
-})
+});
 
 // 6.返回书籍详情
 
