@@ -121,7 +121,7 @@ router.get('/pc/motto', (req, res) => {
     });
 });
 
-// 5.给用户返回书籍
+// 5.给用户返回书籍，这里只返回书籍的部分信息
 
 router.get('/pc/book', (req, res) => {
     models.Library.find({ID: 1}, (err, data) => {
@@ -138,6 +138,10 @@ router.get('/pc/book', (req, res) => {
         }
     });
 });
+
+// 6.返回书籍详情
+
+// 7.按书籍种类返回书籍
 
 
 module.exports = router;

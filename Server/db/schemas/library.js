@@ -44,5 +44,10 @@ const librarySchema = new mongoose.Schema({
     content: {}
 });
 
+// 这里需要考虑支持两种方法的查询
+
+// 需要支持根据 书籍类别 的返回
+// 需要支持根据 书籍名字 的返回
+
 
 module.exports = librarySchema;

@@ -6,7 +6,13 @@ const userSchema = new mongoose.Schema({
     type: String
   },
   userPsd: String,
+  // 记录用户要看的书
   collect: Array,
+  // 记录用户写下的草稿
+  writer: {
+    type: Array,
+    default: []
+  },
   meta: {
     createAt: {
       type: Date,

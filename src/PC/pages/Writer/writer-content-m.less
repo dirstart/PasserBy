@@ -1,5 +1,54 @@
 .pc-writer-main-m {
     width: 100%;
-    height: 650px;
-    background-color: #87baa92b;
+    height: 700px;
+    // background-color: #87baa92b;
+
+    .pc-writer-m-toolbar {
+        margin: 10px 0;
+        width: 100%;
+        height: 40px;
+        background-color: yellowgreen;
+        box-shadow: 3px 3px 3px #000;
+        border-radius: 3px;
+    }
+
+    .common-wrap {
+        width: 100%;
+        height: 300px;
+        box-shadow: 2px 0 10px #f60;
+        border-radius: 3px;
+        color: #fff;
+        overflow-y: scroll;
+        .common-box {
+            box-sizing: border-box;
+            min-height: 100%;
+            outline: none;
+            padding: 25px;
+        }
+    }
+
+    .edit-wrap {
+        background-color: #f4e7a3;
+        color: #010;
+        .edit-box {
+            
+        }
+    }
+
+    .preview-wrap {
+        background-color: #0893cc;
+
+        .preview-box {
+            h4 {
+                color: #000;
+            }
+            article,
+            blockquote {
+                color: #ece;
+            }
+            del {
+                color: #f4e7a3;
+            }
+        }
+    }
 }
