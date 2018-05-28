@@ -19,3 +19,5 @@
 ```
 
 * 2.React-router-dom 自路由等待修改.
+
+* 3.markdown编译之后的英文并没有换行.
