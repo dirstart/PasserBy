@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Menu, Tabs, Icon, Modal, Form, Input, Button} from 'antd';
+import {Menu, Tabs, Icon, Modal, Form, Input, Button, Spin} from 'antd';
 import {Link} from 'react-router-dom';
 import Axios from 'axios';
 
@@ -14,9 +14,16 @@ class SfMenu extends Component {
             isLogin: false,
             modalVisible: false,
             userAction: 'login',
-            userName: ''
+            userName: '',
+            isLoading: false
         }
     }
+
+    componentDidMount() {
+        // 先从本地获取用户信息.
+
+    }
+
     render() {
         const state = this.state;
         const {getFieldDecorator} = this.props.form;
@@ -78,63 +85,71 @@ class SfMenu extends Component {
                 </Menu.Item>
                 {userShow}
             </Menu>
+            
             <Modal 
                 title="用户中心"
                 wrapClassName="vertical-center-modal" 
                 visible={state.modalVisible}
                 width={500}
-                onCancel={() => this.setModalVisible(false)}
+                onCancel={
+                    () => {
+                        this.setModalVisible(false);
+                        this.setState({isLoading: false});
+                    }
+                }
                 footer={null}
             >
-                <Tabs type="card" onChange={this.handleUserAction.bind(this)}>
-                    <TabPane tab={<span><Icon type="android" />登陆</span>} key="login">
-                        <Form layout="horizontal" onSubmit={this.handleLogin.bind(this)}>
-                            <FormItem label="账户">
-                                {getFieldDecorator('userName', {
-                                    rules: [{ required: true, message: '用户名不能为空!' }],
-                                })(
-                                    <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
-                                )}
-                            </FormItem>
-                            <FormItem label="密码">
-                                {getFieldDecorator('userPsd', {
-                                    rules: [{ required: true, message: '密码不能为空!' }],
-                                })(
-                                    <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
-                                )}
-                            </FormItem>
-                            <Button type="primary" className="pc-login-btn" htmlType="submit">登录</Button>
-                            <Button type="primary" className="pc-close-btn" onClick={() => this.setModalVisible(false)} ghost>关闭</Button>
-                        </Form>
-                    </TabPane>
-                    <TabPane tab={<span><Icon type="apple" />注册</span>} key="register">
-                        <Form layout="horizontal" onSubmit={this.handleRegister.bind(this)}>
-                            <FormItem label="账户">
-                                {getFieldDecorator('rUserName', {
-                                    rules: [{ required: true, message: '用户名不能为空!' }],
-                                })(
-                                    <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
-                                )}
-                            </FormItem>
-                            <FormItem label="密码">
-                                {getFieldDecorator('rUserPsd', {
-                                    rules: [{ required: true, message: '密码不能为空!' }],
-                                })(
-                                    <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
-                                )}
-                            </FormItem>
-                            <FormItem label="确认密码">
-                                {getFieldDecorator('rxUserPsd', {
-                                    rules: [{ required: true, message: '密码不能为空!' }],
-                                })(
-                                    <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
-                                )}
-                            </FormItem>
-                            <Button type="primary" className="pc-register-btn" htmlType="submit">注册</Button>
-                            <Button type="primary" className="pc-close-btn" onClick={() => this.setModalVisible(false)} ghost>关闭</Button>
-                        </Form>
-                    </TabPane>
-                </Tabs>
+                <Spin tip="正在拼命加载中" spinning={this.state.isLoading}>
+                    <Tabs type="card" onChange={this.handleUserAction.bind(this)}>
+                        <TabPane tab={<span><Icon type="android" />登陆</span>} key="login">
+                            <Form layout="horizontal" onSubmit={this.handleLogin.bind(this)}>
+                                <FormItem label="账户">
+                                    {getFieldDecorator('userName', {
+                                        rules: [{ required: true, message: '用户名不能为空!' }],
+                                    })(
+                                        <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
+                                    )}
+                                </FormItem>
+                                <FormItem label="密码">
+                                    {getFieldDecorator('userPsd', {
+                                        rules: [{ required: true, message: '密码不能为空!' }],
+                                    })(
+                                        <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
+                                    )}
+                                </FormItem>
+                                <Button type="primary" className="pc-login-btn" htmlType="submit">登录</Button>
+                                <Button type="primary" className="pc-close-btn" onClick={() => this.setModalVisible(false)} ghost>关闭</Button>
+                            </Form>
+                        </TabPane>
+                        <TabPane tab={<span><Icon type="apple" />注册</span>} key="register">
+                            <Form layout="horizontal" onSubmit={this.handleRegister.bind(this)}>
+                                <FormItem label="账户">
+                                    {getFieldDecorator('rUserName', {
+                                        rules: [{ required: true, message: '用户名不能为空!' }],
+                                    })(
+                                        <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
+                                    )}
+                                </FormItem>
+                                <FormItem label="密码">
+                                    {getFieldDecorator('rUserPsd', {
+                                        rules: [{ required: true, message: '密码不能为空!' }],
+                                    })(
+                                        <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
+                                    )}
+                                </FormItem>
+                                <FormItem label="确认密码">
+                                    {getFieldDecorator('rxUserPsd', {
+                                        rules: [{ required: true, message: '密码不能为空!' }],
+                                    })(
+                                        <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
+                                    )}
+                                </FormItem>
+                                <Button type="primary" className="pc-register-btn" htmlType="submit">注册</Button>
+                                <Button type="primary" className="pc-close-btn" onClick={() => this.setModalVisible(false)} ghost>关闭</Button>
+                            </Form>
+                        </TabPane>
+                    </Tabs>
+                </Spin>
             </Modal>
         </div> )
     }
@@ -171,6 +186,7 @@ class SfMenu extends Component {
 
     async handleLogin(e) {
         e.preventDefault();
+        this.setState({isLoading: true});
         let formData = this.props.form.getFieldsValue(),
             userName = (formData.userName && formData.userName.trim()) || '',
             userPsd = (formData.userPsd && formData.userPsd.trim()) || '';
@@ -190,14 +206,17 @@ class SfMenu extends Component {
 
         if (!data.success) {
             alert(data.msg);
+            this.setState({isLoading: false});
+            this.setModalVisible(false);
+            return;
         }
+
         this.setState({
             isLogin: true,
-            userName: userName
+            userName: userName,
+            isLoading: false
         });
         this.setModalVisible(false);
-        // localStorage.userName = userName;
-        // localStorage.userPsd = userPsd;
         localStorage.setItem('userName', userName);
         localStorage.setItem('userPsd', userPsd);
         console.log(localStorage);
@@ -224,13 +243,35 @@ class SfMenu extends Component {
             userPsd
         };
 
+        this.setState({isLoading: true});
         const {data} = await Axios.post('/user/register', userData);
         if (!data.success) {
             console.log(data);
+            this.setState({isLoading: false});
             alert("错误信息:" + data && data.msg);
         } else {
             // 注册成功，关闭窗口，自动登陆
-            alert('注册成功,正在为您自动登陆');
+            // 这里是注册成功之后帮助用户登录的地方
+            let loginData = await Axios.get('/user/login', {
+                params: userData
+            });
+
+            loginData = loginData.data;
+            if (!loginData.success) {
+                alert(data.msg);
+                this.setState({isLoading: false});
+                this.setModalVisible(false);
+                return;
+            }
+
+            this.setState({
+                isLogin: true,
+                userName: userName,
+                isLoading: false
+            });
+            localStorage.setItem('userName', userName);
+            localStorage.setItem('userPsd', userPsd);
+            this.setState({isLoading: false});
             this.setModalVisible(false);
         }
     }

@@ -27,7 +27,7 @@ class WriterContent extends Component {
                 <Popover content={popMes} placement="bottom">
                     <Button  type="primary"
                              ghost
-                             className="pc-writer-pop-title">文章的标题
+                             className="pc-writer-pop-title">好的名字，好的开始
                     </Button>
                 </Popover>
                 <div className="pc-writer-toolbar">
