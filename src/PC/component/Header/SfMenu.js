@@ -19,9 +19,16 @@ class SfMenu extends Component {
         }
     }
 
-    componentDidMount() {
+    componentWillMount() {
         // 先从本地获取用户信息.
-
+        const userName = JSON.parse(localStorage.getItem('userName'));
+        console.log(userName);
+        if (userName) {
+            this.setState({
+                userName,
+                isLogin: true
+            });
+        }
     }
 
     render() {
@@ -180,8 +187,8 @@ class SfMenu extends Component {
         this.setState({
             isLogin: false
         });
-        localStorage.setItem('userName', '');
-        localStorage.setItem('userPsd', '');
+        localStorage.setItem('userName', JSON.stringify(''));
+        localStorage.setItem('userPsd', JSON.stringify(''));
     }
 
     async handleLogin(e) {
@@ -217,8 +224,8 @@ class SfMenu extends Component {
             isLoading: false
         });
         this.setModalVisible(false);
-        localStorage.setItem('userName', userName);
-        localStorage.setItem('userPsd', userPsd);
+        localStorage.setItem('userName', JSON.stringify(userName));
+        localStorage.setItem('userPsd', JSON.stringify(userPsd));
         console.log(localStorage);
     }
 
@@ -269,8 +276,8 @@ class SfMenu extends Component {
                 userName: userName,
                 isLoading: false
             });
-            localStorage.setItem('userName', userName);
-            localStorage.setItem('userPsd', userPsd);
+            localStorage.setItem('userName', JSON.stringify(userName));
+            localStorage.setItem('userPsd', JSON.stringify(userPsd));
             this.setState({isLoading: false});
             this.setModalVisible(false);
         }
