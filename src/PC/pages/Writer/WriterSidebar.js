@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Axios from 'axios';
 import {Link} from 'react-router-dom';
 import {Card, Avatar, Tag} from 'antd';
 import './writer-sidebar.less';
@@ -16,11 +17,13 @@ class WriterSidebar extends Component {
     componentWillMount() {
         // 这里先获取一下用户是否登录，如果没有登录让用户先登录
         const userName = JSON.parse(localStorage.getItem('userName'));
-        if (userName) {
-            console.log('有名字');
-            this.setState({isLogin: true});
+        if (!userName) {
+            return;
         }
 
+        this.setState({isLogin: true});
+        // 通过用户信息获取用户对应的写作信息。
+        this.getUserWriteBook();
     }
 
     render() {
@@ -56,6 +59,12 @@ class WriterSidebar extends Component {
                 }
             </Card>
         </div> )
+    }
+
+    async getUserWriteBook() {
+        const {data} = await Axios.get('/pc/user/write/book', (req, res) => {
+
+        });
     }
 }
  
