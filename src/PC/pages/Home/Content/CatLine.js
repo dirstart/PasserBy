@@ -29,10 +29,13 @@ class CatLine extends Component {
                                 bordered={true}
                                 hoverable="true"
                                 title={book.title}
+                                style={{height: '300px', overflow: 'hidden'}}
                             >
                                 <img src={book.cover}
                                     className="pc-book-cover"
-                                    style={{width: '100%', height: '100%',overflow: 'hidden'}}
+                                    style={{width: '100%', height: '100%',overflow: 'hidden',
+                                        backgroundSize: ''
+                                    }}
                                 alt=""/>
                             </Card>
                         </Col>
