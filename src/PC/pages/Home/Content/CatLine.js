@@ -5,7 +5,9 @@ import {Row, Col, Card} from 'antd';
 class CatLine extends Component {
     constructor(props) {
         super(props);
-        this.state = {  }
+        this.state = { 
+            bookList: []
+        }
     }
     
     componentWillMount() {
@@ -15,10 +17,13 @@ class CatLine extends Component {
     }
 
     render() { 
-        return ( <div className="pc-home-cat-line">
+        return ( <div className="pc-hsome-cat-line">
             <head>这里是类别栏目的名字</head>
             <Row gutter={16}>
-                <Col span={8}>
+                {
+
+                }
+                {/* <Col span={8}>
                     <Card
                         bordered={true}
                         hoverable="true" title="Card title">Card content</Card>
@@ -32,7 +37,7 @@ class CatLine extends Component {
                     <Card
                         bordered={true}
                         hoverable="true" title="Card title">Card content</Card>
-                </Col>
+                </Col> */}
             </Row>
         </div> )
     }
@@ -44,7 +49,8 @@ class CatLine extends Component {
                 num
             }
         });
-        console.log(data);
+        
+        console.log(data && data.data);
     }
 }
  

@@ -6,7 +6,6 @@ const initBook = () => {
     let bookTextOne = fs.readFileSync("./books/1.txt", "utf-8");
     bookTextOne = handle(bookTextOne);
     const bookOneLen = bookTextOne.trim().length;
-    console.log(bookOneLen);
 
     const insertDataOne = new models.Library({
         ID: 1,

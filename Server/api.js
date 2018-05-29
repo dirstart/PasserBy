@@ -167,7 +167,7 @@ router.get('/pc/library/by-cat', (req, res) => {
                 mes: '数据库错误'
             })
         }
-        if (!data[0]) {
+        if (!data.length) {
             res.send({
                 success: false,
                 mes: '数据库中没有您要查找的书籍'
@@ -177,7 +177,7 @@ router.get('/pc/library/by-cat', (req, res) => {
 
         res.send({
             success: true,
-            data: data[0]
+            data: data
         });        
     })
 })
