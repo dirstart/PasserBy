@@ -167,7 +167,6 @@ router.get('/pc/library/by-cat', (req, res) => {
                 mes: '数据库错误'
             })
         }
-        console.log(data[0] && data[0].title);
         if (!data[0]) {
             res.send({
                 success: false,

@@ -24,7 +24,9 @@ class ContentCenter extends Component {
         return ( <div className="pc-home-center-recommend">
             {
                 this.state.catArray.map((item, index) => (
-                    <div className="pc-home-cat-line-wrap" key={index}>
+                    <div className="pc-home-cat-line-wrap"
+                        onClick={() => console.log('123')}
+                        key={index}>
                         <header className="pc-home-cat-line-header">{item.text}</header>
                         <CatLine className="pc-home-cat-item" cat={item}></CatLine>
                     </div>

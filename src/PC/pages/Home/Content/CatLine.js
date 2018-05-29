@@ -19,13 +19,19 @@ class CatLine extends Component {
             <head>这里是类别栏目的名字</head>
             <Row gutter={16}>
                 <Col span={8}>
-                    <Card title="Card title" bordered={false}>Card content</Card>
+                    <Card
+                        bordered={true}
+                        hoverable="true" title="Card title">Card content</Card>
                 </Col>
                 <Col span={8}>
-                    <Card title="Card title" bordered={false}>Card content</Card>
+                    <Card
+                        bordered={true}
+                        hoverable="true" title="Card title">Card content</Card>
                 </Col>
                 <Col span={8}>
-                    <Card title="Card title" bordered={false}>Card content</Card>
+                    <Card
+                        bordered={true}
+                        hoverable="true" title="Card title">Card content</Card>
                 </Col>
             </Row>
         </div> )
