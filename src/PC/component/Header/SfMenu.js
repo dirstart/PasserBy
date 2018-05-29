@@ -182,13 +182,16 @@ class SfMenu extends Component {
             action: key
         });
     }
-
+    
     handleLogout() {
         this.setState({
             isLogin: false
         });
         localStorage.setItem('userName', JSON.stringify(''));
         localStorage.setItem('userPsd', JSON.stringify(''));
+        localStorage.setItem('bookMsg', JSON.stringify(''));
+        // localStorage.setItem('userName', JSON.stringify(''));
+        // localStorage.setItem('userPsd', JSON.stringify(''));
     }
 
     async handleLogin(e) {

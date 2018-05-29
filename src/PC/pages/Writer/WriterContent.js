@@ -6,21 +6,15 @@ import {Popover, Button, Input, Tag} from 'antd';
 class WriterContent extends Component {
     constructor(props) {
         super(props);
+        this.editBox = React.createRef();
         this.state = {
             // 用户的内容信息
             content: '',
             // 用户的书本信息 - 不包括 ID/字数/内容 等。
             bookMsg: {
-                ID: {
-                    isShow: false,
-                    text: '',
-                    tip: 'ID',
-                    isEdit: false,
-                    hook: 'ID'
-                },
                 author: {
                     isShow: true,
-                    text: '推理世界',
+                    text: '您的帐户名',
                     tip: '您的账户名',
                     canEdit: false,
                     isEdit: false,
@@ -69,8 +63,7 @@ class WriterContent extends Component {
 
     componentWillMount() {
         // 从 localStorage 中获取相应的数据
-        console.log(localStorage);
-        this.initStatus();
+        this._initStatus();
     }
     render() {
         const {bookMsg} = this.state;
@@ -128,13 +121,10 @@ class WriterContent extends Component {
             </div>
             <div className="pc-writer-edit"
                 contentEditable="plaintext-only"
+                ref={this.editBox}
                 onInput={(e) => this.handleContentChange(e)}
             ></div>
         </div> )
-    }
-
-    initStatus() {
-        // const bookMsg = JSON.parse(localStorage.getItem('bookMsg'));
     }
 
     handleChangeBookMsg(hook) {
@@ -160,6 +150,44 @@ class WriterContent extends Component {
         this._saveLocal();
     }
     
+    _initStatus() {
+        const {bookMsg, content} = this.state;
+        const userName = JSON.parse(localStorage.getItem('userName'));
+        const oldData = JSON.parse(localStorage.getItem('bookMsg'));
+        const oldContent = JSON.parse(localStorage.getItem('content'));
+        let insertData = {
+            author: {
+                text: userName ? userName : '您还未登录'
+            },
+            title: {
+                text: oldData.title || '少年，写个书名吧'
+            },
+            cat: {
+                text: oldData.cat || '少年，记得写类别哦'
+            },
+            info: {
+                text: oldData.info || '先生，介绍下您的书'
+            },
+            cover: {
+                text: oldData.cover || '女士，添加个封面何如'
+            }
+        };
+        this.state.bookMsg = {
+            author: Object.assign(bookMsg.author, insertData.author),
+            title: Object.assign(bookMsg.title, insertData.title),
+            cat: Object.assign(bookMsg.cat, insertData.cat),
+            info: Object.assign(bookMsg.info, insertData.info),
+            cover: Object.assign(bookMsg.cover, insertData.cover)
+        };
+        this.state.content = oldContent;
+        this.setState(this.state);
+    }
+
+    // 在 componentWillMount 中 ref 并没有被初始化
+    componentDidMount() {
+        this.editBox.current.innerHTML = this.state.content;
+    }
+
     _saveLocal() {
         const {bookMsg, content} = this.state;
         const data = {
@@ -171,12 +199,14 @@ class WriterContent extends Component {
         };
         const book = Object.assign({...data}, {content});
         localStorage.setItem('bookMsg', JSON.stringify(book));
-        console.log(JSON.parse(localStorage.getItem('bookMsg')));
+        localStorage.setItem('content', JSON.stringify(content));
     }
 
     handleContentChange(e) {
         const value = e.target.innerHTML;
-        this.setState({content: value}, () => this._saveLocal());
+        this.setState({content: value}, () =>{
+            this._saveLocal()
+        });
     }
 
     handleDraft() {

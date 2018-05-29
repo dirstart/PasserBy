@@ -27,6 +27,17 @@
 word-wrap: break-word;
 ```
 
+* 4.真是太不有好了，设置了 内容的 contentEditable 会出现问题
+> 光标问题，另外此问题用下列方法解决之后还不能用 win10 自带的输入法。
+我该说是  win10 坑爹呢，还是 contentEditable 坑爹呢。
+
+```
+this.editBox.current.focus();  
+var range = window.getSelection();
+range.selectAllChildren(this.editBox.current); 
+range.collapseToEnd();
+```
+
 
 ### 本次学到了
 
