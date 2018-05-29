@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Axios from 'axios';
 import './writer-content.less';
 
-import {Popover, Button, Input, Tag} from 'antd';
+import {Popover, Button, Input, Tag, message} from 'antd';
 
 class WriterContent extends Component {
     constructor(props) {
@@ -212,7 +212,6 @@ class WriterContent extends Component {
 
     async handleDraft() {
         const {bookMsg} = this.state;
-        console.log(bookMsg);
         const params = {
             author: bookMsg.author.text,
             cat: bookMsg.cat.text,
@@ -221,7 +220,11 @@ class WriterContent extends Component {
             title: bookMsg.title.text
         }
         const {data} = await Axios.post('/pc/user/insert/draft', params);
-        console.log(data);
+        console.log('data', data);
+        if (!data.success) {
+            return;
+        }
+        message.info("添加成功");
     }
 
     handlePublish() {

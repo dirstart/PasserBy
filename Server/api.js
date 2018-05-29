@@ -166,6 +166,8 @@ router.post('/pc/user/insert/draft', (req, res) => {
             // 现将数据拼凑完毕后使用更新
             const preArray = data[0].write;
             for (let i = 0; i < preArray.length; i++) {
+                console.log(preArray[i].cat, recieveData.cat);
+                console.log(preArray[i].title, recieveData.title);
                 if (preArray[i].title === recieveData.title && preArray[i].cat === recieveData.cat) {
                     isSame = true;
                 }
@@ -187,7 +189,10 @@ router.post('/pc/user/insert/draft', (req, res) => {
                         mes: '老哥，数据库更新失败'
                     })
                 } else {
-                    console.log('你成功了');
+                    res.send({
+                        success: true,
+                        mes: '书籍添加成功'
+                    });
                 }
             })
         }
