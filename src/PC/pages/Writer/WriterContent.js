@@ -89,7 +89,7 @@ class WriterContent extends Component {
                                 <span
                                     style={{color: '#bbb'}}
                                     onClick={this.handleChangeBookMsg.bind(this, attr.hook)}
-                                >{attr.text}</span>
+                                >{attr.text ? attr.text : '写个信息吧少年'}</span>
                         }
                     </div>
                     :
