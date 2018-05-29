@@ -94,13 +94,16 @@ class WriterContent extends Component {
             <EditSection attr={bookMsg.author}></EditSection>
             <EditSection attr={bookMsg.title}></EditSection>
             <EditSection attr={bookMsg.cat}></EditSection>
-            <EditSection attr={bookMsg.info}></EditSection>
             <EditSection attr={bookMsg.cover}></EditSection>
-            {/* <h5>字数：这个在数据库上传的时候统计？</h5>
-            <h5>好评率：这个不是用户自己决定的</h5>
-            <h5>粉丝人数； 这个不是用户自己决定的</h5>
-            <h5>书本内容：这个就是我们的章节部分</h5>
-            <h5>书籍ID：这个在插入的时候想办法</h5> */}
+            <EditSection attr={bookMsg.info}></EditSection>
+            <Button type="primary" size="small" ghost
+                    style={{marginLeft: '200px'}}
+                    onClick={this.handleDraft.bind(this)}
+            >存入草稿</Button>
+            <Button type="primary" size="small"
+                    style={{marginLeft: '10px'}}
+                    onClick={this.handlePublish.bind(this)}
+            >发表文章</Button>
         </div>);
 
         return ( <div className="pc-writer-main">
@@ -130,6 +133,14 @@ class WriterContent extends Component {
 
         bookMsg[hook].isEdit = !bookMsg[hook].isEdit;
         this.setState(this.state);
+    }
+
+    handleDraft() {
+        console.log('draft');
+    }
+
+    handlePublish() {
+        console.log('publish');
     }
 }
  
