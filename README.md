@@ -38,6 +38,8 @@ range.selectAllChildren(this.editBox.current);
 range.collapseToEnd();
 ```
 
+* 5.要注意，txt有时候不是 'utf-8' 的格式。乱码问题找编码格式就对了.
+
 
 ### 本次学到了
 

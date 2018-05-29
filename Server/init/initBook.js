@@ -5,7 +5,8 @@ const models = require('../db');
 const initBookSingle = (bookData, index) => {
     let bookTxt = fs.readFileSync(`./books/${index}.txt`, "utf-8");
     bookTxt = handle(bookTxt);
-    const bookLen = bookTxt.trim().length;
+    let bookLen = bookTxt.length;
+
 
     const okData = Object.assign(bookData, {count: bookLen}, {content: bookTxt});
     const insertData = new models.Library(okData);
