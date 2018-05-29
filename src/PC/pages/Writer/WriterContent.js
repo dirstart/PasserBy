@@ -36,9 +36,7 @@ class WriterContent extends Component {
             </div>
             <div className="pc-writer-edit"
                  contentEditable="plaintext-only"
-            >
-                这里是编辑的地方
-            </div>
+            ></div>
         </div> )
     }
 }

@@ -134,7 +134,7 @@ router.get('/pc/book', (req, res) => {
     });
 });
 
-// PC端：查询用户自己写的书
+// PC端：返回用户的 草稿箱/已发表
 router.get('/pc/user/write/book', (req, res) => {
     const userName = req.query.userName;
     models.User.find({userName: userName}, (err, data) => {
@@ -147,7 +147,7 @@ router.get('/pc/user/write/book', (req, res) => {
         } else {
             res.send({
                 success: true,
-                data: data[0].write
+                data: data[0]
             })
         }
     })

@@ -11,7 +11,8 @@ class WriterSidebar extends Component {
         super(props);
         this.state = {
             isLogin: false,
-            writeBook: []
+            writeBook: [],
+            publickBook: []
         }
     }
 
@@ -23,13 +24,12 @@ class WriterSidebar extends Component {
         }
 
         this.setState({isLogin: true});
-        // 通过用户信息获取用户对应的写作信息。
+        // 通过用户信息获取用户的 草稿箱/已发表
         this.getUserWriteBook(userName);
     }
 
     render() {
-        const {writeBook} = this.state;
-        console.log('write-book', writeBook);
+        const {writeBook, publickBook} = this.state;
         return ( <div className="pc-writer-sidebar">
             <Card
                 hoverable="true"
@@ -47,8 +47,10 @@ class WriterSidebar extends Component {
                 />
             </Card>
             <Card
+                className="pc-writer-sidebar-draft"
+                title="您的草稿箱"
                 hoverable="true"
-                style={{ width: 300, marginTop: '10px' }}
+                style={{ width: 300}}
             >
                 {
                     this.state.isLogin ? 
@@ -68,6 +70,23 @@ class WriterSidebar extends Component {
                         </span>
                 }
             </Card>
+            <Card
+                className="pc-writer-sidebar-publish"
+                title="您发表过的文章"
+                hoverable="true"
+                style={{width: 300}}
+            >
+                {
+                    publickBook.length ?
+                        publickBook.map((book, index) => (
+                            <div key={index}>
+                                <span>书名</span>
+                                <span>{book.name}</span>
+                            </div>
+                        )):
+                        <span>用户还未发表任何文章</span>
+                }
+            </Card>
         </div> )
     }
 
@@ -76,7 +95,8 @@ class WriterSidebar extends Component {
             params: {userName}
         });
         this.setState({
-            writeBook: data
+            writeBook: data.data.write,
+            publickBook: data.data.publish
         });
     }
 }

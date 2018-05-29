@@ -13,6 +13,11 @@ const userSchema = new mongoose.Schema({
     type: Array,
     default: []
   },
+  // 记录用户发表的文章
+  publish: {
+    type: Array,
+    default: []
+  },
   meta: {
     createAt: {
       type: Date,
