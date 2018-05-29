@@ -190,7 +190,7 @@ class SfMenu extends Component {
         localStorage.setItem('userName', JSON.stringify(''));
         localStorage.setItem('userPsd', JSON.stringify(''));
         localStorage.setItem('bookMsg', JSON.stringify(''));
-        // localStorage.setItem('userName', JSON.stringify(''));
+        localStorage.setItem('content', JSON.stringify(''));
         // localStorage.setItem('userPsd', JSON.stringify(''));
     }
 

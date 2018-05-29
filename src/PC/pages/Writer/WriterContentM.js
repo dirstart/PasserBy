@@ -34,7 +34,7 @@ class WriterContentM extends Component {
                 editMouseOver={this.handleMouseOver.bind(this)}
                 editScroll={this.handleScroll.bind(this)} />
             <div className="pc-writer-m-toolbar">
-                213
+                可能存在的工具栏
             </div>
             <ShowBox content={previewContent}
                 ref={previewFather => this.previewFather = previewFather}
