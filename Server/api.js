@@ -138,7 +138,6 @@ router.get('/pc/book', (req, res) => {
 router.get('/pc/user/write/book', (req, res) => {
     const userName = req.query.userName;
     models.User.find({userName: userName}, (err, data) => {
-        console.log('后端查到的数据是', data);
         if (err) {
             res.send({
                 success: false,
@@ -153,9 +152,85 @@ router.get('/pc/user/write/book', (req, res) => {
     })
 });
 
-// 6.返回书籍详情
+// PC端：用户将文档存入草稿箱
+router.post('/pc/user/insert/draft', (req, res) => {
+    const recieveData = req.body;
+    let isSame = false;
+    models.User.find({userName: recieveData.author}, (err, data) => {
+        if (err) {
+            res.send({
+                success: false,
+                mes: '老哥，根本没有您的用户'
+            })
+        } else {
+            // 现将数据拼凑完毕后使用更新
+            const preArray = data[0].write;
+            for (let i = 0; i < preArray.length; i++) {
+                if (preArray[i].title === recieveData.title && preArray[i].cat === recieveData.cat) {
+                    isSame = true;
+                }
+            }
+            
+            if (isSame) {
+                res.send({
+                    success: false,
+                    mes: '书本/文章的 名字和类别 不能一起相同'
+                });
+                return;
+            }
 
-// 7.按书籍种类返回书籍
+            const newData = data[0].write.push(recieveData);
+            models.User.update({userName: recieveData.author}, data[0], (err,data) => {
+                if (err) {
+                    res.send({
+                        success: false,
+                        mes: '老哥，数据库更新失败'
+                    })
+                } else {
+                    console.log('你成功了');
+                }
+            })
+        }
+    });
+});
 
+// PC端：用户删除草稿箱中的文档
+router.post('/pc/user/delete/draft', (req, res) => {
+    const recieveData = req.body;
+    console.log(recieveData);
+
+
+    models.User.find({userName: recieveData.author}, (err, data) => {
+        if (err) {
+            res.send({
+                success: false,
+                mes: '老哥，根本没有您的用户'
+            })
+        } else {
+            // 找到我们要删除的那条数据
+            let index;
+            let preArray = data[0].write;
+            for (let i = 0; i < preArray.length; i++) {
+                if (preArray[i].title === recieveData.title && preArray[i].cat === recieveData.cat) {
+                    index = i;
+                }
+            }
+            // 删除掉那条数据
+            preArray.splice(index, 1);
+            data[0].write = preArray;
+
+            models.User.update({userName: recieveData.author}, data[0], (err,data) => {
+                if (err) {
+                    res.send({
+                        success: false,
+                        mes: '老哥，数据库更新失败'
+                    })
+                } else {
+                    console.log('你成功了');
+                }
+            })
+        }
+    });
+})
 
 module.exports = router;

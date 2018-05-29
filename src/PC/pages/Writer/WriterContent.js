@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Axios from 'axios';
 import './writer-content.less';
 
 import {Popover, Button, Input, Tag} from 'antd';
@@ -151,7 +152,7 @@ class WriterContent extends Component {
     }
     
     _initStatus() {
-        const {bookMsg, content} = this.state;
+        const {bookMsg} = this.state;
         const userName = JSON.parse(localStorage.getItem('userName'));
         const oldData = JSON.parse(localStorage.getItem('bookMsg'));
         const oldContent = JSON.parse(localStorage.getItem('content'));
@@ -160,16 +161,16 @@ class WriterContent extends Component {
                 text: userName ? userName : '您还未登录'
             },
             title: {
-                text: oldData.title || '少年，写个书名吧'
+                text: oldData.title || '没书名哦'
             },
             cat: {
-                text: oldData.cat || '少年，记得写类别哦'
+                text: oldData.cat || '记得写类别'
             },
             info: {
-                text: oldData.info || '先生，介绍下您的书'
+                text: oldData.info || '介绍下您的书'
             },
             cover: {
-                text: oldData.cover || '女士，添加个封面何如'
+                text: oldData.cover || '添加个封面何如'
             }
         };
         this.state.bookMsg = {
@@ -209,8 +210,18 @@ class WriterContent extends Component {
         });
     }
 
-    handleDraft() {
-        console.log('draft');
+    async handleDraft() {
+        const {bookMsg} = this.state;
+        console.log(bookMsg);
+        const params = {
+            author: bookMsg.author.text,
+            cat: bookMsg.cat.text,
+            cover: bookMsg.cover.text,
+            info: bookMsg.info.text,
+            title: bookMsg.title.text
+        }
+        const {data} = await Axios.post('/pc/user/insert/draft', params);
+        console.log(data);
     }
 
     handlePublish() {

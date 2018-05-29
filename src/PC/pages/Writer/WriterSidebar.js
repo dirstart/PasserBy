@@ -12,7 +12,8 @@ class WriterSidebar extends Component {
         this.state = {
             isLogin: false,
             writeBook: [],
-            publickBook: []
+            publickBook: [],
+            userName: ''
         }
     }
 
@@ -23,7 +24,7 @@ class WriterSidebar extends Component {
             return;
         }
 
-        this.setState({isLogin: true});
+        this.setState({isLogin: true, userName});
         // 通过用户信息获取用户的 草稿箱/已发表
         this.getUserWriteBook(userName);
     }
@@ -33,7 +34,7 @@ class WriterSidebar extends Component {
         return ( <div className="pc-writer-sidebar">
             <Card
                 hoverable="true"
-                style={{ width: 300 }}
+                style={{ width: 360 }}
                 cover={<img alt="example" src="https://raw.githubusercontent.com/dirstart/image_bed/master/graduate2.jpg" />}
                 actions={[
                     <Link to="/p_writer">富文本</Link>,
@@ -50,16 +51,26 @@ class WriterSidebar extends Component {
                 className="pc-writer-sidebar-draft"
                 title="您的草稿箱"
                 hoverable="true"
-                style={{ width: 300}}
+                style={{ width: 360, maxHeight: 200, overflowY: 'scroll'}}
             >
                 {
                     this.state.isLogin ? 
                         <div>
                             {
                                 writeBook.length ?
-                                writeBook.map((book, index) => (
-                                    <div key={index}>
-                                        您写过的书 {book.name}
+                                writeBook.map((book, index, data) => (
+                                    <div key={index} style={{marginBottom: '10px'}}>
+                                        <span className="pc-pre-circle"></span>
+                                        <Tag color="#903"
+                                            style={{marginRight: '5px',
+                                            textAlign: 'center',
+                                            minWidth: '100px'}}>类别：{book.cat}</Tag>
+                                        <Tag color="blue"
+                                            style={{minWidth: '100px', textAlign: 'center'}}
+                                        >书名：{book.title}</Tag>
+                                        <Tag color="red"
+                                            onClick={this.handleDelete.bind(this, data[index])}
+                                        >删除</Tag>
                                     </div>
                                 )):<div>您尚未开始您的旅途。</div>
                             }
@@ -74,7 +85,7 @@ class WriterSidebar extends Component {
                 className="pc-writer-sidebar-publish"
                 title="您发表过的文章"
                 hoverable="true"
-                style={{width: 300}}
+                style={{ width: 360, maxHeight: 200, overflowY: 'scroll',marginBottom: '30px'}}
             >
                 {
                     publickBook.length ?
@@ -98,6 +109,12 @@ class WriterSidebar extends Component {
             writeBook: data.data.write,
             publickBook: data.data.publish
         });
+    }
+
+    async handleDelete(book) {
+        console.log('删除操作', book);
+        const {data} = await Axios.post('/pc/user/delete/draft', book);
+        // console.log(data);
     }
 }
  
