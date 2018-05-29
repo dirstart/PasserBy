@@ -7,6 +7,10 @@ class WriterContent extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            // 当前保存的用户的编辑信息
+            nowMsg: {
+
+            },
             bookMsg: {
                 ID: {
                     isShow: false,
@@ -14,15 +18,6 @@ class WriterContent extends Component {
                     tip: 'ID',
                     isEdit: false,
                     hook: 'ID'
-                },
-                title: {
-                    isShow: true,
-                    text: '一个好的名字是一个好的开始',
-                    tip: '修改您的文章/书名',
-                    canEdit: true,
-                    isEdit: false,
-                    hook: 'title',
-                    color: '#089e8a'
                 },
                 author: {
                     isShow: true,
@@ -32,6 +27,15 @@ class WriterContent extends Component {
                     isEdit: false,
                     hook: 'author',
                     color: 'yellow'
+                },
+                title: {
+                    isShow: true,
+                    text: '一个好的名字是一个好的开始',
+                    tip: '修改您的文章/书名',
+                    canEdit: true,
+                    isEdit: false,
+                    hook: 'title',
+                    color: '#089e8a'
                 },
                 cat: {
                     isShow: true,
@@ -87,8 +91,8 @@ class WriterContent extends Component {
             </section>)
         }
         const popMes = (<div>
-            <EditSection attr={bookMsg.title}></EditSection>
             <EditSection attr={bookMsg.author}></EditSection>
+            <EditSection attr={bookMsg.title}></EditSection>
             <EditSection attr={bookMsg.cat}></EditSection>
             <EditSection attr={bookMsg.info}></EditSection>
             <EditSection attr={bookMsg.cover}></EditSection>
@@ -123,7 +127,7 @@ class WriterContent extends Component {
         if (!bookMsg[hook].canEdit) {
             return;
         }
-        
+
         bookMsg[hook].isEdit = !bookMsg[hook].isEdit;
         this.setState(this.state);
     }
