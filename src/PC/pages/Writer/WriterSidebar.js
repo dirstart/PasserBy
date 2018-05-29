@@ -3,7 +3,6 @@ import Axios from 'axios';
 import {Link} from 'react-router-dom';
 import {Card, Avatar, Tag} from 'antd';
 import './writer-sidebar.less';
-import { Button } from 'antd/lib/radio';
 
 const {Meta} = Card;
 
@@ -58,11 +57,11 @@ class WriterSidebar extends Component {
                         <div>
                             {
                                 writeBook.length ?
-                                writeBook.map((book, index) => {
+                                writeBook.map((book, index) => (
                                     <div key={index}>
                                         您写过的书 {book.name}
                                     </div>
-                                }):<div>您尚未开始您的旅途。</div>
+                                )):<div>您尚未开始您的旅途。</div>
                             }
                         </div>
                         :

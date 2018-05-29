@@ -226,7 +226,6 @@ class SfMenu extends Component {
         this.setModalVisible(false);
         localStorage.setItem('userName', JSON.stringify(userName));
         localStorage.setItem('userPsd', JSON.stringify(userPsd));
-        console.log(localStorage);
     }
 
     async handleRegister(e) {

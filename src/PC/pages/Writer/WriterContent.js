@@ -7,10 +7,9 @@ class WriterContent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            // 当前保存的用户的编辑信息
-            nowMsg: {
-
-            },
+            // 用户的内容信息
+            content: '',
+            // 用户的书本信息 - 不包括 ID/字数/内容 等。
             bookMsg: {
                 ID: {
                     isShow: false,
@@ -39,7 +38,7 @@ class WriterContent extends Component {
                 },
                 cat: {
                     isShow: true,
-                    text: '您的类别',
+                    text: '您还没有选择您的类别',
                     tip: '您的书籍类别',
                     canEdit: true,
                     isEdit: false,
@@ -58,7 +57,7 @@ class WriterContent extends Component {
                 cover: {
                     isShow: true,
                     text: '您的书籍封面',
-                    tip: '您的书籍封面',
+                    tip: '您还没有制定您的封面',
                     isEdit: false,
                     canEdit: false,
                     hook: 'cover',
@@ -66,6 +65,12 @@ class WriterContent extends Component {
                 }
             }
         }
+    }
+
+    componentWillMount() {
+        // 从 localStorage 中获取相应的数据
+        console.log(localStorage);
+        this.initStatus();
     }
     render() {
         const {bookMsg} = this.state;
@@ -77,11 +82,13 @@ class WriterContent extends Component {
                         <Tag color={attr.color}>{attr.tip}</Tag>
                         {
                             attr.isEdit ?
-                                <Input size="small" style={{flex: 1}} placeholder="123" />
+                                <Input size="small" style={{flex: 1}} defaultValue={attr.text}
+                                    onPressEnter={(e) => this.handleCheckBookMsg(e, attr.hook)}
+                                />
                                 :
                                 <span
                                     style={{color: '#bbb'}}
-                                    onClick={this.changeBookEditStatus.bind(this, attr.hook)}
+                                    onClick={this.handleChangeBookMsg.bind(this, attr.hook)}
                                 >{attr.text}</span>
                         }
                     </div>
@@ -120,19 +127,56 @@ class WriterContent extends Component {
                 </div>
             </div>
             <div className="pc-writer-edit"
-                 contentEditable="plaintext-only"
+                contentEditable="plaintext-only"
+                onInput={(e) => this.handleContentChange(e)}
             ></div>
         </div> )
     }
 
-    changeBookEditStatus(hook) {
+    initStatus() {
+        // const bookMsg = JSON.parse(localStorage.getItem('bookMsg'));
+    }
+
+    handleChangeBookMsg(hook) {
         const {bookMsg} = this.state;
         if (!bookMsg[hook].canEdit) {
             return;
         }
 
+        // 将其改为编辑状态
         bookMsg[hook].isEdit = !bookMsg[hook].isEdit;
         this.setState(this.state);
+    }
+
+    handleCheckBookMsg(e, hook) {
+        const value = e.target.value;
+        const {bookMsg} = this.state;
+
+        // 修改完毕，state中 转为 查看状态
+        bookMsg[hook].isEdit = !bookMsg[hook].isEdit;
+        bookMsg[hook].text = value;
+        this.setState(this.state);
+        // 修改完毕，将缓存(更新)信息存入 localStorage
+        this._saveLocal();
+    }
+    
+    _saveLocal() {
+        const {bookMsg, content} = this.state;
+        const data = {
+            title: bookMsg['title'].text,
+            author: bookMsg['author'].text,
+            cat: bookMsg['cat'].text,
+            info: bookMsg['info'].text,
+            cover: bookMsg['cover'].text,
+        };
+        const book = Object.assign({...data}, {content});
+        localStorage.setItem('bookMsg', JSON.stringify(book));
+        console.log(JSON.parse(localStorage.getItem('bookMsg')));
+    }
+
+    handleContentChange(e) {
+        const value = e.target.innerHTML;
+        this.setState({content: value}, () => this._saveLocal());
     }
 
     handleDraft() {

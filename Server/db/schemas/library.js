@@ -6,6 +6,11 @@ const librarySchema = new mongoose.Schema({
         unique: true,
         type: Number
     },
+    // 是否是 markdown 格式的文本
+    isMD: {
+        type: Boolean,
+        default: false
+    },
     // 书名
     title: {
         type: String
