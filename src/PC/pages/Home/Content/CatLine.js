@@ -16,28 +16,28 @@ class CatLine extends Component {
         this.getBook(type, num);
     }
 
-    render() { 
+    render() {
+        const {bookList} = this.state;
+        console.log('test', bookList);
         return ( <div className="pc-hsome-cat-line">
             <head>这里是类别栏目的名字</head>
             <Row gutter={16}>
                 {
-
+                    bookList.map((book, index) => (
+                        <Col span={8}>
+                            <Card
+                                bordered={true}
+                                hoverable="true"
+                                title={book.title}
+                            >
+                                <img src={book.cover}
+                                    className="pc-book-cover"
+                                    style={{width: '100%', height: '100%',overflow: 'hidden'}}
+                                alt=""/>
+                            </Card>
+                        </Col>
+                    ))
                 }
-                {/* <Col span={8}>
-                    <Card
-                        bordered={true}
-                        hoverable="true" title="Card title">Card content</Card>
-                </Col>
-                <Col span={8}>
-                    <Card
-                        bordered={true}
-                        hoverable="true" title="Card title">Card content</Card>
-                </Col>
-                <Col span={8}>
-                    <Card
-                        bordered={true}
-                        hoverable="true" title="Card title">Card content</Card>
-                </Col> */}
             </Row>
         </div> )
     }
@@ -50,7 +50,12 @@ class CatLine extends Component {
             }
         });
         
-        console.log(data && data.data);
+        console.log(data);
+        if (data.success) {
+            this.setState({
+                bookList: data.data
+            })
+        }
     }
 }
  

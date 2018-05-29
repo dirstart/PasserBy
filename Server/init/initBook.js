@@ -13,7 +13,7 @@ const initBook = () => {
         author: '东野圭吾',
         cat: '治愈',
         info: '很温暖的一本书',
-        cover: '暂时没有',
+        cover: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527622723534&di=3178c7999d2f001a1e6d32b6deaf4297&imgtype=0&src=http%3A%2F%2Fimg.ishuo.cn%2F1701%2F1484891539.jpg',
         count: bookOneLen,
         content: bookTextOne
     });
