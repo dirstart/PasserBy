@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Menu, Tabs, Icon, Modal, Form, Input, Button, Spin} from 'antd';
+import {Menu, Tabs, Icon, Modal, Form, Input, Button, Spin, message} from 'antd';
 import {Link} from 'react-router-dom';
 import Axios from 'axios';
 
@@ -220,7 +220,7 @@ class SfMenu extends Component {
             this.setModalVisible(false);
             return;
         }
-
+        
         this.setState({
             isLogin: true,
             userName: userName,
@@ -229,6 +229,7 @@ class SfMenu extends Component {
         this.setModalVisible(false);
         localStorage.setItem('userName', JSON.stringify(userName));
         localStorage.setItem('userPsd', JSON.stringify(userPsd));
+        message.info("登录成功");
     }
 
     async handleRegister(e) {
@@ -282,6 +283,7 @@ class SfMenu extends Component {
             localStorage.setItem('userPsd', JSON.stringify(userPsd));
             this.setState({isLoading: false});
             this.setModalVisible(false);
+            message.info("注册成功");
         }
     }
 }
