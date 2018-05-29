@@ -6,13 +6,16 @@ class ContentCenter extends Component {
         super(props);
         this.state = { 
             catArray: [{
-                cat: "zhiyu",
+                cat: "治愈",
+                text: "温馨治愈",
                 num: 3
             }, {
-                cat: "xuanhuan",
+                cat: "科幻",
+                text: "科幻魔法",
                 num: 3
             }, {
-                cat: "mingzhu",
+                cat: "名著",
+                text: "世界名著",
                 num: 3
             }]
         }
@@ -22,7 +25,7 @@ class ContentCenter extends Component {
             {
                 this.state.catArray.map((item, index) => (
                     <div className="pc-home-cat-line-wrap" key={index}>
-                        <header className="pc-home-cat-line-header">{item.cat}</header>
+                        <header className="pc-home-cat-line-header">{item.text}</header>
                         <CatLine className="pc-home-cat-item" cat={item}></CatLine>
                     </div>
                 ))

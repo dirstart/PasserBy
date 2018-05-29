@@ -117,8 +117,8 @@ router.get('/pc/motto', (req, res) => {
     });
 });
 
-// 公共库：返回书籍信息
-router.get('/pc/book', (req, res) => {
+// 公共库：返回 公共库/发表文章的 书本
+router.get('/pc/library', (req, res) => {
     models.Library.find({ID: 1}, (err, data) => {
         if (err) {
             res.send({
@@ -133,6 +133,55 @@ router.get('/pc/book', (req, res) => {
         }
     });
 });
+
+// 公共库： 返回 公共库/发表文章的 具体书本的细节
+router.get('/pc/library/detail', (req, res) => {
+    const params = {ID: 1};
+    models.Library.find(params, (err, data) => {
+        if (err) {
+            res.send({
+                success: false,
+                mes: '数据库错误'
+            })
+        } else {
+            res.send({
+                success: true,
+                data: data[0]
+            });
+        }
+    })
+})
+
+// 公共库： 根据 种类返回 公共库/发表文章 的具体书本信息
+router.get('/pc/library/by-cat', (req, res) => {
+    const params = req.query;
+    // {type: x, num: y}
+
+    const cat = params.type;
+    const num = params.num;
+
+    models.Library.find({cat}, (err, data) => {
+        if (err) {
+            res.send({
+                success: false,
+                mes: '数据库错误'
+            })
+        }
+        console.log(data[0] && data[0].title);
+        if (!data[0]) {
+            res.send({
+                success: false,
+                mes: '数据库中没有您要查找的书籍'
+            });
+            return;
+        }
+
+        res.send({
+            success: true,
+            data: data[0]
+        });        
+    })
+})
 
 // PC端：返回用户的 草稿箱/已发表
 router.get('/pc/user/write/book', (req, res) => {

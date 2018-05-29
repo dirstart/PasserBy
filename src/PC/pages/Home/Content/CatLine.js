@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import Axios from 'axios';
 import {Row, Col, Card} from 'antd';
 
 class CatLine extends Component {
@@ -7,6 +7,13 @@ class CatLine extends Component {
         super(props);
         this.state = {  }
     }
+    
+    componentWillMount() {
+        const type = this.props.cat && this.props.cat.cat;
+        const num = this.props.cat && this.props.cat.num;
+        this.getBook(type, num);
+    }
+
     render() { 
         return ( <div className="pc-home-cat-line">
             <head>这里是类别栏目的名字</head>
@@ -22,6 +29,16 @@ class CatLine extends Component {
                 </Col>
             </Row>
         </div> )
+    }
+
+    async getBook(type, num) {
+        const {data} = await Axios.get('/pc/library/by-cat',{
+            params: {
+                type,
+                num
+            }
+        });
+        console.log(data);
     }
 }
  
