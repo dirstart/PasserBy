@@ -152,6 +152,35 @@ router.get('/pc/library/detail', (req, res) => {
     })
 })
 
+// 公共库： 根据 ID返回 书籍信息
+router.get('/pc/library/by-id', (req, res) => {
+    const params = req.query;
+    console.log(params);
+    models.Library.find(params, (err, data) => {
+        if (err) {
+            res.send({
+                success: false,
+                mes: '数据库错误'
+            })
+        }
+
+        console.log(data);
+
+        if (!data.length) {
+            res.send({
+                success: false,
+                mes: '数据库中没有您要查找的书籍'
+            });
+            return;
+        }
+
+        res.send({
+            success: true,
+            data: data[0]
+        });        
+    })
+})
+
 // 公共库： 根据 种类返回 公共库/发表文章 的具体书本信息
 router.get('/pc/library/by-cat', (req, res) => {
     const params = req.query;
@@ -247,6 +276,7 @@ router.post('/pc/user/insert/draft', (req, res) => {
     });
 });
 
+
 // PC端：用户删除草稿箱中的文档
 router.post('/pc/user/delete/draft', (req, res) => {
     const recieveData = req.body;
@@ -287,6 +317,6 @@ router.post('/pc/user/delete/draft', (req, res) => {
             })
         }
     });
-})
+});
 
 module.exports = router;

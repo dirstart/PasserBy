@@ -4,7 +4,7 @@ const librarySchema = new mongoose.Schema({
     // 书籍ID
     ID: {
         unique: true,
-        type: Number
+        type: String
     },
     // 是否是 markdown 格式的文本
     isMD: {
