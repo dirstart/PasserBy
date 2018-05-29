@@ -231,7 +231,10 @@ router.post('/pc/user/delete/draft', (req, res) => {
                         mes: '老哥，数据库更新失败'
                     })
                 } else {
-                    console.log('你成功了');
+                    res.send({
+                        success: true,
+                        mes: '删除成功!'
+                    })
                 }
             })
         }

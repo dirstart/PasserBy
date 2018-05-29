@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
 import {Link} from 'react-router-dom';
-import {Card, Avatar, Tag} from 'antd';
+import {Card, Avatar, Tag, message} from 'antd';
 import './writer-sidebar.less';
 
 const {Meta} = Card;
@@ -114,7 +114,10 @@ class WriterSidebar extends Component {
     async handleDelete(book) {
         console.log('删除操作', book);
         const {data} = await Axios.post('/pc/user/delete/draft', book);
-        // console.log(data);
+        if (data.success) {
+            message.info("删除成功！", () => console.log('123'));
+            window.location.reload();
+        }
     }
 }
  

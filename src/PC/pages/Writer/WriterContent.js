@@ -161,16 +161,16 @@ class WriterContent extends Component {
                 text: userName ? userName : '您还未登录'
             },
             title: {
-                text: oldData.title || '没书名哦'
+                text: (oldData && oldData.title) || '没书名哦'
             },
             cat: {
-                text: oldData.cat || '记得写类别'
+                text: (oldData && oldData.cat) || '记得写类别'
             },
             info: {
-                text: oldData.info || '介绍下您的书'
+                text: (oldData && oldData.info) || '介绍下您的书'
             },
             cover: {
-                text: oldData.cover || '添加个封面何如'
+                text: (oldData && oldData.cover) || '添加个封面何如'
             }
         };
         this.state.bookMsg = {
@@ -225,6 +225,9 @@ class WriterContent extends Component {
             return;
         }
         message.info("添加成功");
+        if (data.success) {
+            window.location.reload();
+        }
     }
 
     handlePublish() {

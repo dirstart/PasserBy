@@ -192,6 +192,7 @@ class SfMenu extends Component {
         localStorage.setItem('bookMsg', JSON.stringify(''));
         localStorage.setItem('content', JSON.stringify(''));
         // localStorage.setItem('userPsd', JSON.stringify(''));
+        window.location.reload();
     }
 
     async handleLogin(e) {
@@ -230,6 +231,7 @@ class SfMenu extends Component {
         localStorage.setItem('userName', JSON.stringify(userName));
         localStorage.setItem('userPsd', JSON.stringify(userPsd));
         message.info("登录成功");
+        window.location.reload();
     }
 
     async handleRegister(e) {
@@ -284,6 +286,7 @@ class SfMenu extends Component {
             this.setState({isLoading: false});
             this.setModalVisible(false);
             message.info("注册成功");
+            window.loacation.reload();
         }
     }
 }
