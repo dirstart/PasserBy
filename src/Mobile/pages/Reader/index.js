@@ -28,7 +28,9 @@ class ReaderMain extends Component {
             bookMsg: {},
             isShowNav: false,
             isShowTool: false,
-            readBg: '#e9dfc7'
+            readBg: '#e9dfc7',
+            fontColor: 'rgba(0, 0, 0, 0.65)',
+            isNight: false
         }
     }
 
@@ -44,7 +46,7 @@ class ReaderMain extends Component {
     }
 
     render() { 
-        const {isReading, bookMsg, isShowNav, isShowTool, readBg} = this.state;
+        const {isReading, bookMsg, isShowNav, isShowTool, readBg, fontColor, isNight} = this.state;
         return ( <div className="mobile-reader-wrap">
             {   
                 isReading ?
@@ -77,7 +79,9 @@ class ReaderMain extends Component {
                         <Icon type="left-circle-o" style={{margin: '0 5px 0 10px'}}/>
                         <span>返回书架</span>
                     </div>
-                    <div className="mobile-read-mod-content" style={{backgroundColor: readBg}}>
+                    <div className="mobile-read-mod-content"
+                        style={{backgroundColor: readBg, color: fontColor}}
+                    >
                         {bookMsg && bookMsg.content}
                     </div>
                     <div className="mobile-read-mod-bottom"
@@ -91,9 +95,9 @@ class ReaderMain extends Component {
                             <Icon type="amazon" style={{fontSize: 24, margin: '10px 0 5px 0'}}/>
                             <div className="bottom-title">字体</div>
                         </div>
-                        <div className="bottom-item">
+                        <div className="bottom-item" onClick={this.handleSetNight.bind(this)}>
                             <Icon type="key" style={{fontSize: 24, margin: '10px 0 5px 0'}}/>
-                            <div className="bottom-title">夜间</div>
+                            <div className="bottom-title">{isNight ? '白天' : '夜间'}</div>
                         </div>
                     </div>
                 </div>)
@@ -154,6 +158,14 @@ class ReaderMain extends Component {
     handleChangeBg(color) {
         this.setState({
             readBg: color
+        });
+    }
+
+    handleSetNight() {
+        this.setState({
+            fontColor: this.state.isNight ? '#ccc' : 'rgba(0, 0, 0, 0.65)',
+            readBg: this.state.isNight ? '#111' : '#e9dfc7',
+            isNight: !this.state.isNight
         });
     }
 }
