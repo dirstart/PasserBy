@@ -12,7 +12,7 @@ class ReaderContent extends Component {
 
     componentDidMount() {
         const search = window.location.search.split('?')[1];
-        const ID = (search && search.length || false) ? search.split('=')[1] : 'no';
+        const ID = ((search && search.length) || false) ? search.split('=')[1] : 'no';
         this.initStatus(ID);
     }
 

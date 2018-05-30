@@ -6,6 +6,7 @@ import ReaderMain from '../../pages/Reader/index';
 import WriterMain from '../../pages/Writer/index';
 import MHome from '../../pages/MHome/index';
 import MSearch from '../../pages/MSearch/index';
+import MDetail from '../../pages/MDetail/index';
 
 class MMain extends Component {
     constructor(props) {
@@ -17,6 +18,7 @@ class MMain extends Component {
             <Switch>
                 <Route exact path='/' component={ReaderMain}/>
                 <Route path='/m_reader' component={ReaderMain}/>
+                <Route path='/m_detail' component={MDetail}/>
                 <Route path='/m_writer' component={WriterMain}/>
                 <Route path='/m_home' component={MHome}/>
                 <Route path='/m_search' component={MSearch}/>
