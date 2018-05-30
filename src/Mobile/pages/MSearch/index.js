@@ -60,7 +60,7 @@ class MSearch extends Component {
                                 <BookCard key={index} book={item} />
                             ))
                             :
-                            <div>空空如也</div>
+                            <div style={{textAlign: 'center', color: '#fff'}}>空空如也</div>
                     }
                 </Content>
             </Spin>

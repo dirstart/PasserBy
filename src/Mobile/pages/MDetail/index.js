@@ -55,7 +55,9 @@ class MDetail extends Component {
             </div>
             <div className="m-book-detail-btn">
                 <Button type="primary" className="btn" ghost>收藏了！</Button>
-                <Button type="primary" className="btn" >开始阅读</Button>
+                <Link to={`/m_reader?book=${bookMsg.ID}`} className="btn" style={{flex: 1,display: 'flex'}} >
+                    <Button type="primary" >开始阅读</Button>
+                </Link>
             </div>
         </div> )
     }
