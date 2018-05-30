@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
-import {message, Layout, Icon} from 'antd';
+import {message, Layout, Icon, Button} from 'antd';
 import {Link} from 'react-router-dom';
 import './index.less';
 const Header = Layout.Header;
@@ -52,6 +52,10 @@ class MDetail extends Component {
             </div>
             <div className="m-book-detail-info">
                 {bookMsg.info}
+            </div>
+            <div className="m-book-detail-btn">
+                <Button type="primary" className="btn" ghost>收藏了！</Button>
+                <Button type="primary" className="btn" >开始阅读</Button>
             </div>
         </div> )
     }
