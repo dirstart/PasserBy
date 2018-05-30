@@ -17,6 +17,8 @@ const contentStyle = {
     height: 'calc(100vh - 1rem - 64px)'
 }
 
+const bgColor = ['#f7eee5', '#e9dfc7', '#a4a4a4', '#cdefce', '#283548', '#666bfe'];
+
 class ReaderMain extends Component {
     constructor(props) {
         super(props);
@@ -24,7 +26,9 @@ class ReaderMain extends Component {
             bookList: [],
             isReading: false,
             bookMsg: {},
-            isShowNav: false
+            isShowNav: false,
+            isShowTool: false,
+            readBg: '#e9dfc7'
         }
     }
 
@@ -40,21 +44,40 @@ class ReaderMain extends Component {
     }
 
     render() { 
-        const {isReading, bookMsg, isShowNav} = this.state;
+        const {isReading, bookMsg, isShowNav, isShowTool, readBg} = this.state;
         return ( <div className="mobile-reader-wrap">
-            {
+            {   
                 isReading ?
                 (<div className="mobile-read-mod-wrap">
                     <div className="mobile-read-touch-panel"
                         onClick={this.handleTouchPanel.bind(this)}
                     ></div>
+                    <div className="mobile-read-tool" style={{display: isShowTool && isShowNav ? 'block' : 'none'}}>
+                        <div className="mobile-read-tool-font mobile-tool-mod">
+                            <span className="mobile-tool-font-text">字号</span>
+                            <button className="mobile-tool-font-large">大</button>
+                            <button className="mobile-tool-font-small">小</button>
+                        </div>
+                        <div className="mobile-read-tool-bg mobile-tool-mod">
+                            <span className="mobile-tool-bg-text">背景</span>
+                            <ul>
+                                {bgColor.map((item, index) => (
+                                    <li style={{backgroundColor: item}}
+                                        key={index}
+                                        onClick={this.handleChangeBg.bind(this, item)}
+                                    >
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    </div>
                     <div className="mobile-read-mod-top"
                         style={{display: isShowNav ? 'block' : 'none'}}
                     >
                         <Icon type="left-circle-o" style={{margin: '0 5px 0 10px'}}/>
                         <span>返回书架</span>
                     </div>
-                    <div className="mobile-read-mod-content">
+                    <div className="mobile-read-mod-content" style={{backgroundColor: readBg}}>
                         {bookMsg && bookMsg.content}
                     </div>
                     <div className="mobile-read-mod-bottom"
@@ -64,7 +87,7 @@ class ReaderMain extends Component {
                             <Icon type="menu-fold" style={{fontSize: 24, margin: '10px 0 5px 0'}} />
                             <div className="bottom-title">目录</div>
                         </div>
-                        <div className="bottom-item">
+                        <div className="bottom-item" onClick={this.handleShowTool.bind(this)}>
                             <Icon type="amazon" style={{fontSize: 24, margin: '10px 0 5px 0'}}/>
                             <div className="bottom-title">字体</div>
                         </div>
@@ -119,6 +142,19 @@ class ReaderMain extends Component {
         this.setState({
             isShowNav: !this.state.isShowNav
         })
+    }
+
+    handleShowTool() {
+        console.log('123');
+        this.setState({
+            isShowTool: !this.state.isShowTool
+        });
+    }
+
+    handleChangeBg(color) {
+        this.setState({
+            readBg: color
+        });
     }
 }
  
