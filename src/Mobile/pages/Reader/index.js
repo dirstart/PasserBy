@@ -50,13 +50,29 @@ class ReaderMain extends Component {
                     ></div>
                     <div className="mobile-read-mod-top"
                         style={{display: isShowNav ? 'block' : 'none'}}
-                    >2</div>
+                    >
+                        <Icon type="left-circle-o" style={{margin: '0 5px 0 10px'}}/>
+                        <span>返回书架</span>
+                    </div>
                     <div className="mobile-read-mod-content">
                         {bookMsg && bookMsg.content}
                     </div>
                     <div className="mobile-read-mod-bottom"
                         style={{display: isShowNav ? 'block' : 'none'}}
-                    >1</div>
+                    >
+                        <div className="bottom-item">
+                            <Icon type="menu-fold" style={{fontSize: 24, margin: '10px 0 5px 0'}} />
+                            <div className="bottom-title">目录</div>
+                        </div>
+                        <div className="bottom-item">
+                            <Icon type="amazon" style={{fontSize: 24, margin: '10px 0 5px 0'}}/>
+                            <div className="bottom-title">字体</div>
+                        </div>
+                        <div className="bottom-item">
+                            <Icon type="key" style={{fontSize: 24, margin: '10px 0 5px 0'}}/>
+                            <div className="bottom-title">夜间</div>
+                        </div>
+                    </div>
                 </div>)
                 :
                 (<Layout>
