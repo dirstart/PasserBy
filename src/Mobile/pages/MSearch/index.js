@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
-import {Layout, Icon, Input, Spin} from 'antd';
+import {Layout, Icon, Input, Spin, message} from 'antd';
+import Axios from 'axios';
 
 import BookCard from '../common/BookCard';
-import Template from '../../../redux/Template';
 import './index.less';
 
 const Header = Layout.Header;
@@ -29,13 +29,13 @@ class MSearch extends Component {
          }
     }
 
-    componentWillReceiveProps(nextProps) {
-        this.setState({
-            isLoading: false,
-            searchValue: nextProps.fetchBookList.name,
-            bookList: nextProps.fetchBookList.books
-        });
-    }
+    // componentWillReceiveProps(nextProps) {
+    //     this.setState({
+    //         isLoading: false,
+    //         searchValue: nextProps.fetchBookList.name,
+    //         bookList: nextProps.fetchBookList.books
+    //     });
+    // }
 
     render() {
         let {bookList} = this.state;
@@ -57,7 +57,7 @@ class MSearch extends Component {
                     {
                         bookList && bookList.length?
                             bookList.map((item, index) => (
-                                <BookCard key={index} />
+                                <BookCard key={index} book={item} />
                             ))
                             :
                             <div>空空如也</div>
@@ -72,15 +72,34 @@ class MSearch extends Component {
         this.setState({ searchValue: e.target.value});
     }
 
-    handleSearch() {
+    async handleSearch() {
         const {searchValue} = this.state;
         if (searchValue && searchValue.length) {
             this.setState({isLoading: true});
-            this.props.getBookList(searchValue);
+            const {data} = await Axios.get('/mobile/library/by-name', {
+                params: {
+                    name: searchValue
+                }
+            });
+
+            if (data.success) {
+                this.setState({
+                    bookList: data.data,
+                    isLoading: false
+                });
+            } else {
+                message.error('数据库中没有您要查找的书');
+                this.setState({
+                    isLoading: false
+                });
+            }
+            
         } else {
-            console.log('输入不能为空');
+            message.error('输入不能为空');
         }
     }
+
+    
 }
  
-export default Template(MSearch);
+export default MSearch;

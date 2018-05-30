@@ -164,8 +164,6 @@ router.get('/pc/library/by-id', (req, res) => {
             })
         }
 
-        console.log(data);
-
         if (!data.length) {
             res.send({
                 success: false,
@@ -243,8 +241,6 @@ router.post('/pc/user/insert/draft', (req, res) => {
             // 现将数据拼凑完毕后使用更新
             const preArray = data[0].write;
             for (let i = 0; i < preArray.length; i++) {
-                console.log(preArray[i].cat, recieveData.cat);
-                console.log(preArray[i].title, recieveData.title);
                 if (preArray[i].title === recieveData.title && preArray[i].cat === recieveData.cat) {
                     isSame = true;
                 }
@@ -280,8 +276,6 @@ router.post('/pc/user/insert/draft', (req, res) => {
 // PC端：用户删除草稿箱中的文档
 router.post('/pc/user/delete/draft', (req, res) => {
     const recieveData = req.body;
-    console.log(recieveData);
-
 
     models.User.find({userName: recieveData.author}, (err, data) => {
         if (err) {
@@ -317,6 +311,45 @@ router.post('/pc/user/delete/draft', (req, res) => {
             })
         }
     });
+});
+
+// 移动端： 根据 title 返回书籍信息
+router.get('/mobile/library/by-name', (req, res) => {
+    models.Library.find({}, (err, data) => {
+        const key = req.query;
+        // key: { name: 'str' }
+        console.log('key', key); 
+
+        if (err) {
+            res.send({
+                success: false,
+                mes: '数据库错误'
+            });
+
+            return;
+        }
+
+        let bookRes = [];
+
+        for (let i = 0; i < data.length; i++) {
+            if (data[i].title.indexOf(key.name) !== -1) {
+                bookRes.push(data[i]);
+            }
+        }
+
+        if (bookRes.length) {
+            res.send({
+                success: true,
+                data: bookRes
+            }) 
+        } else {
+            res.send({
+                success: false,
+                mes: '数据库中没有您要查询的书籍'
+            });
+        }
+
+    })
 });
 
 module.exports = router;
