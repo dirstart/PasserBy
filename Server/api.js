@@ -219,6 +219,8 @@ router.get('/pc/user/write/book', (req, res) => {
                 mes: '数据库错误'
             });
         } else {
+
+        console.log(data);
             res.send({
                 success: true,
                 data: data[0]

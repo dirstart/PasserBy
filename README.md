@@ -1,4 +1,13 @@
-### 遇见的问题记录
+### USE
+
+```
+进入 Passer-By 文件夹，输入 npm install
+安装完依赖时候 输入 npm start
+打开服务器(要求做mongoDB相关的安装配置)  cd Server  =>  node index.js
+```
+
+
+## 遇见的问题记录
 
 * 1.Antd的引入和 less-loader 的冲突问题
 > 解决方案：https://segmentfault.com/q/1010000011915034
