@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #wrap {
+            background-color: #f60;
+            overflow: scroll;
+        }
+        #box {
+            height: 400px;
+            background-color: #089e8a;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <div id="box"></div>
+    </div>
+</body>
+<script>
+    const oWrap = document.getElementById('wrap');
+    console.log(oWrap.offsetHeight);
+    const oBox = document.getElementById('box');
+    console.log(oBox.offsetHeight);
+</script>
+</html>

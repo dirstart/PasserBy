@@ -12,7 +12,7 @@ router.post('/user/register', (req, res) => {
         userPsd: req.body.userPsd
     });
 
-    // 查重
+    // 查找是否有重复的用户名
     models.User.findOne({userName: newData.userName}, (err, user) => {
         if (err) {
             console.log('系统在查重时出现错误', err);
@@ -319,8 +319,6 @@ router.post('/pc/user/delete/draft', (req, res) => {
 router.get('/mobile/library/by-name', (req, res) => {
     models.Library.find({}, (err, data) => {
         const key = req.query;
-        // key: { name: 'str' }
-        console.log('key', key); 
 
         if (err) {
             res.send({
@@ -330,9 +328,7 @@ router.get('/mobile/library/by-name', (req, res) => {
 
             return;
         }
-
         let bookRes = [];
-
         for (let i = 0; i < data.length; i++) {
             if (data[i].title.indexOf(key.name) !== -1) {
                 bookRes.push(data[i]);

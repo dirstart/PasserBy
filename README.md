@@ -49,6 +49,9 @@ range.collapseToEnd();
 
 * 5.要注意，txt有时候不是 'utf-8' 的格式。乱码问题找编码格式就对了.
 
+* 6.react跨域问题
+> https://segmentfault.com/q/1010000012094380
+
 
 ### 本次学到了
 
@@ -68,3 +71,7 @@ range.collapseToEnd();
 
 * 5.前端接收到的所有的错误返回信息可以封装成一个函数，写在一个公共函数中.
 * 6.很多关于颜色的设计可以做成 渐变的，可以更好看。同时，可以做成随机的。
+
+### 应该记录的
+
+* 追书神器API：http://api.zhuishushenqi.com/book/fuzzy-search?query=abc&start=0
